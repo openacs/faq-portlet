@@ -61,7 +61,16 @@ begin
 	value => 'f'
 );	
 
-  -- package_id must be configured
+  -- link_hideable_p 
+  portal_datasource.set_def_param (
+	datasource_id => ds_id,
+	config_required_p => 't',
+	configured_p => 't',
+	key => 'link_hideable_p',
+	value => 't'
+);  
+
+-- package_id must be configured
   portal_datasource.set_def_param (
 	datasource_id => ds_id,
 	config_required_p => 't',
