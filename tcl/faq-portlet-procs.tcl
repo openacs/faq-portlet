@@ -72,8 +72,10 @@ namespace eval faq_portlet {
 	    # Tell portal to add this element to the page
 	    set element_id [portal::add_element \
                     -pretty_name [get_pretty_name] \
+                    -force_region 1 \
                     $portal_id \
-                    [my_name]]
+                    [my_name]
+            ]
 
 	    # There is already a value for the param which must be overwritten
 	    portal::set_element_param $element_id package_id $package_id
