@@ -25,6 +25,11 @@ namespace eval faq_portlet {
 	return "Frequently Asked Questions"
     }
 
+    ad_proc -public link {
+    } {
+	return "faq"
+    }
+
     ad_proc -public add_self_to_page { 
 	page_id 
 	package_id
