@@ -71,12 +71,12 @@ namespace eval faq_portlet {
 	set rowcount 0
 
 	db_foreach select_files_and_folders $query {
-	    append data "<li>$faq_id - $faq_name</li>"
+	    append data "<tr><td>$faq_id</td><td>$faq_name</td></tr>"
 	    incr rowcount
 	} 
 
 	set template "
-	<table border=1 cellpadding=2 cellspacing=2>
+	<table width=100% border=1 cellpadding=2 cellspacing=2>
 	<tr>
 	<td bgcolor=#cccccc>faq_id</td>
 	<td bgcolor=#cccccc>Name</td>
