@@ -31,7 +31,7 @@
       <table border="0" bgcolor="white" cellpadding="2" cellspacing="0" width="100%">
         <tr class="table-header">
           <td><strong class="table-header">#faq-portlet.name#</strong></td>
-          <td><strong class="table-header">#faq-portlet.group#</strong></td>
+          <td><strong class="table-header">#dotlrn.clubs_pretty_name#</strong></td>
         </tr>
     </if>
 
@@ -62,7 +62,6 @@
 
 <% set old_package_id $new_package_id %>
 
-</else>
     <if @one_instance_p@ false and @new_package_id@ ne @old_package_id@>
       </tr>
     </if>
@@ -91,9 +90,3 @@
 <else>
   &nbsp;
 </else>
-
-
-
-
-
-
