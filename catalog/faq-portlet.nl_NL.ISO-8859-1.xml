@@ -8,7 +8,7 @@
   <msg key="group">Groep</msg>
   <msg key="name">Naam</msg>
   <msg key="new_faq">Nieuwe Frequente Vraag</msg>
-  <msg key="no_faqs">Geen Frequente Vragen gevonden</msg>
+  <msg key="no_faqs">Geen veelgestelde vragen (faqs)</msg>
   <msg key="one_admin_faq">Voor administratieve doeleinden kan er slechts een geval van Frequente Vragen voorkomen</msg>
-  <msg key="pretty_name">Frequente Vragen (FAQs)</msg>
+  <msg key="pretty_name">Veelgestelde vragen (faqs)</msg>
 </message_catalog>
