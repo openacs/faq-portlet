@@ -18,7 +18,7 @@ declare
   ds_id portal_datasources.datasource_id%TYPE;
 begin
   ds_id := portal_datasource.new(
-    name             => 'faq-portlet',
+    name             => 'faq_portlet',
     description      => 'Displays the given folder_id'
   );
 

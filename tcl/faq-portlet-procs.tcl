@@ -17,7 +17,7 @@ namespace eval faq_portlet {
 
     ad_proc -private my_name {
     } {
-    return "faq-portlet"
+    return "faq_portlet"
     }
 
     ad_proc -public get_pretty_name {
