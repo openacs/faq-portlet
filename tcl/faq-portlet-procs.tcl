@@ -102,10 +102,18 @@ namespace eval faq_portlet {
             foreach package_id $list_of_package_ids {
         
                 if { [db_string count_faqs "select count(*) as count from faq_q_and_as, acs_objects where context_id = :package_id and object_id=faq_id" ] != 0 } {
-                    set name [db_string select_name "select name from site_nodes where node_id= (select parent_id from site_nodes where object_id=:package_id)" -default ""]
-                    append template "<tr><td colspan=2><b>$name</b> (<a href=[dotlrn_community::get_url_from_package_id -package_id $package_id]>more</a>)<br></td></tr>"
+                    
+                    # aks fold into site_nodes:: or dotlrn_community
+                    set comm_object_id [db_string select_name "select object_id from site_nodes where node_id= (select parent_id from site_nodes where object_id=:package_id)" ]
+                    
+                    set name [db_string select_pretty_name "
+                    select instance_name 
+                    from apm_packages
+                    where package_id= :comm_object_id "]
+                    
+                    append template "<tr><td colspan=2><a href=[dotlrn_community::get_url_from_package_id -package_id $package_id]><b>$name</b> FAQs</a></td></tr>"
                     db_foreach select_faqs $query {
-                        append template "<tr><td><a href=[dotlrn_community::get_url_from_package_id -package_id $package_id]one-faq?faq_id=$faq_id>$faq_name</a></td></tr>"
+                        append template "<tr><td>&nbsp;&nbsp;<a href=[dotlrn_community::get_url_from_package_id -package_id $package_id]one-faq?faq_id=$faq_id>$faq_name</a></td></tr>"
                     }
                 } else {
                     # workspace no faqs
