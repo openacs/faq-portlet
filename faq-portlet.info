@@ -17,7 +17,8 @@
 
         <provides url="faq-portlet" version="0.1a"/>
         <requires url="new-portal" version="0.1a"/>
-        <requires url="faq" version="4.0"/>
+
+        <!-- requires url="faq" -->
 
         <files>
             <file type="package_spec" path="faq-portlet.info"/>
