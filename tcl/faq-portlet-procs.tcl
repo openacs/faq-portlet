@@ -104,6 +104,12 @@ namespace eval faq_portlet {
 
     }
 
+    ad_proc -public edit { 
+	nothing here
+    } {
+	return ""
+    }
+
     ad_proc -public remove_self_from_page { 
 	portal_id 
 	package_id 

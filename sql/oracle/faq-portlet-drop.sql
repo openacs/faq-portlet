@@ -34,3 +34,78 @@ end;
 /
 show errors;
 
+declare
+	foo integer;
+begin
+
+	-- drop the hooks
+	foo := acs_sc_impl.delete_alias (
+	       'portal_datasource',
+	       'faq_portlet',
+	       'MyName'
+	);
+
+	foo := acs_sc_impl.delete_alias (
+	       'portal_datasource',
+	       'faq_portlet',
+	       'GetPrettyName'
+	);
+
+
+	foo := acs_sc_impl.delete_alias (
+	       'portal_datasource',
+	       'faq_portlet',
+	       'Link'
+	);
+
+	foo := acs_sc_impl.delete_alias (
+	       'portal_datasource',
+	       'faq_portlet',
+	       'AddSelfToPage'
+	);
+
+	foo := acs_sc_impl.delete_alias (
+	       'portal_datasource',
+	       'faq_portlet',
+	       'Show'
+	);
+
+	foo := acs_sc_impl.delete_alias (
+	       'portal_datasource',
+	       'faq_portlet',
+	       'Edit'
+	);
+
+	foo := acs_sc_impl.delete_alias (
+	       'portal_datasource',
+	       'faq_portlet',
+	       'RemoveSelfFromPage'
+	);
+
+	foo := acs_sc_impl.delete_alias (
+	       'portal_datasource',
+	       'faq_portlet',
+	       'MakeSelfAvailable'
+	);
+
+	foo := acs_sc_impl.delete_alias (
+	       'portal_datasource',
+	       'faq_portlet',
+	       'MakeSelfUnavailable'
+	);
+
+	-- Drop the binding
+	acs_sc_binding.delete (
+	    contract_name => 'portal_datasource',
+	    impl_name => 'faq_portlet'
+	);
+
+	-- drop the impl
+	foo := acs_sc_impl.delete (
+		'portal_datasource',
+		'faq_portlet'
+	);
+end;
+/
+show errors
+
