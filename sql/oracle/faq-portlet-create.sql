@@ -99,6 +99,7 @@ begin
     foo := acs_sc_impl.new(
         impl_contract_name => 'portal_datasource',
         impl_name => 'faq_portlet',
+        impl_pretty_name => 'FAQ Portlet',
         impl_owner_name => 'faq_portlet'
     );
 
