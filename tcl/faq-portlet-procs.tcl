@@ -22,23 +22,23 @@ namespace eval faq_portlet {
 
     ad_proc -public add_self_to_page { 
 	page_id 
-	community_id
+	package_id
     } {
-	Adds a faq PE to the given page with the community_id
+	Adds a faq PE to the given page with the package_id
 	being opaque data in the portal configuration.
     
 	@return element_id The new element's id
 	@param page_id The page to add self to
-	@param community_id The community with the folder
+	@param package_id the id of the faq package for this community
 	@author arjun@openforce.net
 	@creation-date Sept 2001
     } {
 	# Tell portal to add this element to the page
 	set element_id [portal::add_element $page_id [my_name]]
 	
-	# The default param "community_id" must be configured
-	set key "community_id"
-	portal::set_element_param $element_id $key $community_id
+	# The default param "package_id" must be configured
+	set key "package_id"
+	portal::set_element_param $element_id $key $package_id
 
 	return $element_id
     }
@@ -56,7 +56,7 @@ namespace eval faq_portlet {
 
 	array set config $cf	
 
-	# things we need in the config: community_id
+	# things we need in the config: package_id
 
 	ns_log notice "AKS55 got here"
 
@@ -64,7 +64,7 @@ namespace eval faq_portlet {
 	set query " select faq_id, faq_name
 	from acs_objects o, faqs f
 	where object_id = faq_id
-        and context_id = $config(community_id)
+        and context_id = $config(package_id)
 	order by faq_name"
 	
 	set data ""
@@ -101,16 +101,16 @@ namespace eval faq_portlet {
 
     ad_proc -public remove_self_from_page { 
 	portal_id 
-	community_id 
+	package_id 
     } {
 	  Removes a faq PE from the given page 
     
 	  @param page_id The page to remove self from
-	  @param community_id
+	  @param package_id
 	  @author arjun@openforce.net
 	  @creation-date Sept 2001
     } {
-	# Find out the element_id that corresponds to this community_id
+	# Find out the element_id that corresponds to this package_id
 
 	# XXX - fixme - the PE needs to find out it's own ID based on
 	# the datasource_id. Need a call in NPP to do this
@@ -121,8 +121,8 @@ namespace eval faq_portlet {
 	portal_element_map pem
 	where pem.portal_id = $portal_id and
 	pep.element_id = pem.element_id and
-	pep.key = 'community_id' and
-	pep.value = $community_id
+	pep.key = 'package_id' and
+	pep.value = $package_id
 	"]  } {
 	    
 	    # delete the params
@@ -130,7 +130,7 @@ namespace eval faq_portlet {
 	    ns_log Notice "AKS58 faq-portlet-procs delete called"
 
 	 } else {
-	     ad_return_complaint 1 "faq_portlet::remove_self_from_page: Invalid portal_id  and/or community_id given."
+	     ad_return_complaint 1 "faq_portlet::remove_self_from_page: Invalid portal_id  and/or package_id given."
 	     ad_script_abort
 	 }
 
