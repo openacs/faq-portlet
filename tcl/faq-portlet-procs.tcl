@@ -87,7 +87,7 @@ namespace eval faq_portlet {
 	ns_log notice "AKS56 got here $rowcount"
 
 	if {!$rowcount} {
-	    set template "<i>No faqs available</i>"
+	    set template "<i>No faqs available</i><P><a href=faq>more...</a>"
 	}
 
 	set code [template::adp_compile -string $template]
