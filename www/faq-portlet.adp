@@ -34,6 +34,9 @@
           <td><strong class="table-header">#faq-portlet.group#</strong></td>
         </tr>
     </if>
+    <else>
+      <ul>
+    </else>
 
 <multiple name="faqs">
 
@@ -62,7 +65,6 @@
 
 <% set old_package_id $new_package_id %>
 
-</else>
     <if @one_instance_p@ false and @new_package_id@ ne @old_package_id@>
       </tr>
     </if>
@@ -71,6 +73,9 @@
     <if @one_instance_p@ false>
       </table>
     </if>
+    <else>
+      </ul>
+    </else>
 
   </if>
   <else>
