@@ -17,7 +17,12 @@ namespace eval faq_portlet {
 
     ad_proc -private my_name {
     } {
-    return "faq_portlet"
+        return "faq_portlet"
+    }
+
+    ad_proc -private my_package_key {
+    } {
+        return "faq-portlet"
     }
 
     ad_proc -public get_pretty_name {
@@ -75,60 +80,11 @@ namespace eval faq_portlet {
 	 @author arjun@openforce.net
 	 @creation-date Sept 2001
     } {
-
-	array set config $cf	
-
-        set query "select f.faq_id, 
-        f.faq_name, 
-        entry_id, 
-        question
-	from acs_objects o, faqs f, faq_q_and_as qa
-	where object_id = f.faq_id
-        and context_id = :package_id
-        and qa.faq_id(+) = f.faq_id"
-	
-	# Should be a list already! 
-	set list_of_package_ids $config(package_id)
-
-        if { $config(shaded_p) == "t" } {
-            set data ""
-            set template ""
-        } else {
-            # not shaded
-            set template "
-            <table width=100% border=0 cellpadding=2 cellspacing=2>
-            "
-
-            foreach package_id $list_of_package_ids {
-        
-                if { [db_string count_faqs "select count(*) as count from faq_q_and_as, acs_objects where context_id = :package_id and object_id=faq_id" ] != 0 } {
-                    
-                    # aks fold into site_nodes:: or dotlrn_community
-                    set comm_object_id [db_string select_name "select object_id from site_nodes where node_id= (select parent_id from site_nodes where object_id=:package_id)" ]
-                    
-                    set name [db_string select_pretty_name "
-                    select instance_name 
-                    from apm_packages
-                    where package_id= :comm_object_id "]
-                    
-                    append template "<tr><td colspan=2><a href=[dotlrn_community::get_url_from_package_id -package_id $package_id]><b>$name</b> FAQs</a></td></tr>"
-                    db_foreach select_faqs $query {
-                        append template "<tr><td>&nbsp;&nbsp;<a href=[dotlrn_community::get_url_from_package_id -package_id $package_id]one-faq?faq_id=$faq_id>$faq_name</a></td></tr>"
-                    }
-                } else {
-                    # workspace no faqs
-                    set template "<table border=0 cellpadding=2 cellspacing=2 width=100%><tr><td><small>No FAQs available</small></td></tr>"
-                }
-            }
-            append template "</table>"
-        }
-        
-        set code [template::adp_compile -string $template]
-    
-        set output [template::adp_eval code]
-        
-        return $output
-        
+        # no return call required with the helper proc
+        portal::show_proc_helper \
+                -package_key [my_package_key] \
+                -config_list $cf \
+                -template_src "faq-portlet"
     }
 
 
