@@ -75,7 +75,7 @@
   </if>
   <else>
     <if @faqs:rowcount@ eq 1>
-      @faq_name@
+      <a href="@faq_url@one-faq?faq_id=@faq_id@">@faq_name@</a>
       <ul>
 <multiple name="questions">
         <li><a href="@faq_url@one-question?entry_id=@questions.entry_id@">@questions.question@</a></li>
