@@ -40,7 +40,7 @@ foreach package_id $list_of_package_ids {
         append data "$comm_name<P><ul>"
 
         db_foreach faqs_select {} {
-            append data "<li><a href=${comm_url}one-faq?faq_id=$faq_id>$faq_name</a><P>"
+            append data "<li><a href=${comm_url}one-faq?faq_id=$faq_id>$faq_name</a><br>"
         }
         
         append data "</ul>"
