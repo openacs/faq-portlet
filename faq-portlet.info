@@ -24,6 +24,10 @@
             <file type="data_model" db_type="oracle" path="sql/oracle/faq-admin-portlet-create.sql"/>
             <file type="data_model_create" db_type="oracle" path="sql/oracle/faq-portlet-create.sql"/>
             <file type="data_model_drop" db_type="oracle" path="sql/oracle/faq-portlet-drop.sql"/>
+            <file type="data_model" db_type="postgresql" path="sql/postgresql/faq-admin-portlet-create.sql"/>
+            <file type="data_model" db_type="postgresql" path="sql/postgresql/faq-admin-portlet-drop.sql"/>
+            <file type="data_model_create" db_type="postgresql" path="sql/postgresql/faq-portlet-create.sql"/>
+            <file type="data_model_drop" db_type="postgresql" path="sql/postgresql/faq-portlet-drop.sql"/>
             <file type="tcl_procs" path="tcl/faq-admin-portlet-procs.tcl"/>
             <file type="tcl_procs" path="tcl/faq-portlet-procs.tcl"/>
             <file type="content_page" path="www/faq-admin-portlet.adp"/>
