@@ -75,7 +75,7 @@
 
   </if>
   <else>
-    No FAQs
+    <small>No FAQs</small>
   </else>
 
 </if>
