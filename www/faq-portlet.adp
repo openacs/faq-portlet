@@ -56,7 +56,7 @@
         <tr bgcolor="#ffffff">
       </else>
         <td><a href="@faqs.url@one-faq?faq_id=@faqs.faq_id@">@faqs.faq_name@</a></td>
-        <td>@faqs.community_name@</td>
+        <td>@faqs.parent_name@</td>
       </tr>
     </else>
 
