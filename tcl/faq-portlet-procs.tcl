@@ -117,6 +117,7 @@ namespace eval faq_portlet {
                     }
                 } else {
                     # workspace no faqs
+                    set template "<table border=0 cellpadding=2 cellspacing=2 width=100%><tr><td><small>No FAQs available</small></td></tr>"
                 }
             }
             append template "</table>"
