@@ -50,7 +50,7 @@
     </if>
     <else>
       <if @faqs.rownum@ odd>
-        <tr bgcolor="#ececec">
+        <tr bgcolor="#eeeeee">
       </if>
       <else>
         <tr bgcolor="#ffffff">

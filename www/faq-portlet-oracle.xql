@@ -6,9 +6,7 @@
     <fullquery name="select_faqs">
         <querytext>
             select acs_objects.context_id as package_id,
-                   (select apm_packages.instance_name
-                    from apm_packages
-                    where apm_packages.package_id = apm_package.parent_id(acs_objects.context_id)) as parent_name,
+                   acs_object.name(acs_objects.context_id) as parent_name,
                    (select site_node.url(site_nodes.node_id)
                     from site_nodes
                     where site_nodes.object_id = acs_objects.context_id) as url,
