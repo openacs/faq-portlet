@@ -6,7 +6,8 @@
 
 -- Copyright (C) 2001 OpenForce, Inc.
 -- @author Arjun Sanyal (arjun@openforce.net)
--- @creation-date 2001-30-09
+-- @author Ben Adida (ben@openforce)
+-- @creation-date 2002-01-19
 
 -- $Id$
 
@@ -18,7 +19,7 @@ declare
   ds_id portal_datasources.datasource_id%TYPE;
 begin
   ds_id := portal_datasource.new(
-    name             => 'faq_portlet',
+    name             => 'faq_admin_portlet',
     description      => 'Displays the given folder_id'
   );
 
@@ -30,7 +31,7 @@ begin
 	config_required_p => 't',
 	configured_p => 't',
 	key => 'shadeable_p',
-	value => 't'
+	value => 'f'
 );	
 
 
@@ -40,7 +41,7 @@ begin
 	config_required_p => 't',
 	configured_p => 't',
 	key => 'hideable_p',
-	value => 't'
+	value => 'f'
 );	
 
   -- user_editable_p 
@@ -91,8 +92,8 @@ begin
 	-- create the implementation
 	foo := acs_sc_impl.new (
 		'portal_datasource',
-		'faq_portlet',
-		'faq_portlet'
+		'faq_admin_portlet',
+		'faq_admin_portlet'
 	);
 
 end;
@@ -106,73 +107,73 @@ begin
 	-- add all the hooks
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'faq_portlet',
+	       'faq_admin_portlet',
 	       'MyName',
-	       'faq_portlet::my_name',
+	       'faq_admin_portlet::my_name',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'faq_portlet',
+	       'faq_admin_portlet',
 	       'GetPrettyName',
-	       'faq_portlet::get_pretty_name',
+	       'faq_admin_portlet::get_pretty_name',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'faq_portlet',
+	       'faq_admin_portlet',
 	       'Link',
-	       'faq_portlet::link',
+	       'faq_admin_portlet::link',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'faq_portlet',
+	       'faq_admin_portlet',
 	       'AddSelfToPage',
-	       'faq_portlet::add_self_to_page',
+	       'faq_admin_portlet::add_self_to_page',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'faq_portlet',
+	       'faq_admin_portlet',
 	       'Show',
-	       'faq_portlet::show',
+	       'faq_admin_portlet::show',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'faq_portlet',
+	       'faq_admin_portlet',
 	       'Edit',
-	       'faq_portlet::edit',
+	       'faq_admin_portlet::edit',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'faq_portlet',
+	       'faq_admin_portlet',
 	       'RemoveSelfFromPage',
-	       'faq_portlet::remove_self_from_page',
+	       'faq_admin_portlet::remove_self_from_page',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'faq_portlet',
+	       'faq_admin_portlet',
 	       'MakeSelfAvailable',
-	       'faq_portlet::make_self_available',
+	       'faq_admin_portlet::make_self_available',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'faq_portlet',
+	       'faq_admin_portlet',
 	       'MakeSelfUnavailable',
-	       'faq_portlet::make_self_unavailable',
+	       'faq_admin_portlet::make_self_unavailable',
 	       'TCL'
 	);
 
@@ -187,10 +188,9 @@ begin
 	-- Add the binding
 	acs_sc_binding.new (
 	    contract_name => 'portal_datasource',
-	    impl_name => 'faq_portlet'
+	    impl_name => 'faq_admin_portlet'
 	);
 end;
 /
 show errors
 
-@faq-admin-portlet-create.sql
