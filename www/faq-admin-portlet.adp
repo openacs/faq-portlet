@@ -26,5 +26,5 @@
   </li>
 </multiple>
   <br>
-  <li<a href=@url@admin/faq-new>New FAQ</a></li>
+  <li><a href="@url@admin/faq-new">New FAQ</a></li>
 </ul>
