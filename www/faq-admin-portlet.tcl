@@ -26,6 +26,8 @@ ad_page_contract {
 # Configuration
 array set config $cf	
 
+set referer [ns_conn url]
+
 # Should be a list already! 
 set list_of_package_ids $config(package_id)
 
@@ -38,7 +40,8 @@ set package_id [lindex $list_of_package_ids 0]
 
 db_multirow faqs select_faqs {
     select f.faq_id, 
-           f.faq_name
+           f.faq_name,
+           f.disabled_p
     from faqs f,
          acs_objects o
     where f.faq_id = o.object_id

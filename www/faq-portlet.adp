@@ -28,10 +28,10 @@
 %>
 
     <if @one_instance_p@ false>
-      <table border="0" bgcolor="white" cellpadding="2" cellspacing="3" width="100%">
-        <tr>
-          <td><strong>Name</strong></td>
-          <td><strong>Group</strong></td>
+      <table border="0" bgcolor="white" cellpadding="2" cellspacing="0" width="100%">
+        <tr class="table-header">
+          <td><strong class="table-header">Name</strong></td>
+          <td><strong class="table-header">Group</strong></td>
         </tr>
     </if>
 
@@ -50,10 +50,10 @@
     </if>
     <else>
       <if @faqs.rownum@ odd>
-        <tr bgcolor="#eeeeee">
+        <tr class="z_light">
       </if>
       <else>
-        <tr bgcolor="#ffffff">
+        <tr class="z_dark">
       </else>
         <td><a href="@faqs.url@one-faq?faq_id=@faqs.faq_id@">@faqs.faq_name@</a></td>
         <td>@faqs.parent_name@</td>
@@ -91,3 +91,9 @@
 <else>
   &nbsp;
 </else>
+
+
+
+
+
+
