@@ -91,6 +91,11 @@ namespace eval faq_portlet {
 	    set template "<i>No faqs available</i><P><a href=faq>more...</a>"
 	} 
 
+	if { $config(shaded_p) == "t" } {
+	    set data ""
+	    set template ""
+	}
+
 	set code [template::adp_compile -string $template]
 
 	set output [template::adp_eval code]
