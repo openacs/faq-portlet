@@ -107,8 +107,8 @@ begin
     foo := acs_sc_impl.new_alias(
         'portal_datasource',
         'faq_portlet',
-        'MyName',
-        'faq_portlet::my_name',
+        'GetMyName',
+        'faq_portlet::get_my_name',
         'TCL'
     );
 
@@ -157,22 +157,6 @@ begin
         'faq_portlet',
         'RemoveSelfFromPage',
         'faq_portlet::remove_self_from_page',
-        'TCL'
-    );
-
-    foo := acs_sc_impl.new_alias(
-        'portal_datasource',
-        'faq_portlet',
-        'MakeSelfAvailable',
-        'faq_portlet::make_self_available',
-        'TCL'
-    );
-
-    foo := acs_sc_impl.new_alias(
-        'portal_datasource',
-        'faq_portlet',
-        'MakeSelfUnavailable',
-        'faq_portlet::make_self_unavailable',
         'TCL'
     );
 

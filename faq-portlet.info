@@ -33,7 +33,7 @@
             <file type="content_page" path="www/faq-portlet.tcl"/>
         </files>
         <parameters>
-        <!-- No version parameters -->
+            <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="faq_portlet_force_region"  default="1" description="the portal region to put the faq portlet into"/>
         </parameters>
 
     </version>
