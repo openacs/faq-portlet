@@ -20,7 +20,7 @@
 
 <if @shaded_p@ ne "t">
 
-  <if @faqs:rowcount@ gt 0>
+  <if @faqs:rowcount@ gt 1>
 
 <%
     set new_package_id ""
@@ -60,10 +60,9 @@
       </tr>
     </else>
 
-<%
-    set old_package_id $new_package_id
-%>
+<% set old_package_id $new_package_id %>
 
+</else>
     <if @one_instance_p@ false and @new_package_id@ ne @old_package_id@>
       </tr>
     </if>
@@ -75,7 +74,17 @@
 
   </if>
   <else>
-    <small>No FAQs</small>
+    <if @faqs:rowcount@ eq 1>
+      @faq_name@
+      <ul>
+<multiple name="questions">
+        <li><a href="@faq_url@one-question?entry_id=@questions.entry_id@">@questions.question@</a></li>
+</multiple>
+      </ul>
+    </if>
+    <else>
+      <small>No FAQs</small>
+    </else>
   </else>
 
 </if>

@@ -31,3 +31,22 @@ set list_of_package_ids $config(package_id)
 set one_instance_p [ad_decode [llength $list_of_package_ids] 1 1 0]
 
 db_multirow faqs select_faqs {}
+
+if {${faqs:rowcount} == 1} {
+    set faq_name [lindex [array get {faqs:1} faq_name] 1]
+    set parent_name [lindex [array get {faqs:1} parent_name] 1]
+    set faq_url [lindex [array get {faqs:1} url] 1]
+    set faq_id [lindex [array get {faqs:1} faq_id] 1]
+
+    db_multirow questions select_faq_questions {
+        select entry_id,
+               faq_id,
+               question,
+               answer,
+               sort_key 
+        from faq_q_and_as 
+        where faq_id = :faq_id
+        order by sort_key
+    }
+
+}
