@@ -30,8 +30,8 @@
     <if @one_instance_p@ false>
       <table border="0" bgcolor="white" cellpadding="2" cellspacing="3" width="100%">
         <tr>
-          <td><strong>Name</strong></td>
-          <td><strong>Group</strong></td>
+          <td><strong>#faq-portlet.name#</strong></td>
+          <td><strong>#faq-portlet.group#</strong></td>
         </tr>
     </if>
 
@@ -83,7 +83,7 @@
       </ul>
     </if>
     <else>
-      <small>No FAQs</small>
+      <small>#faq-portlet.no_faqs#</small>
     </else>
   </else>
 

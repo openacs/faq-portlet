@@ -38,7 +38,7 @@ namespace eval faq_portlet {
 
     ad_proc -public get_pretty_name {
     } {
-        return "Frequently Asked Questions (FAQs)"
+        return "#faq-portlet.pretty_name#"
     }
 
     ad_proc -public link {

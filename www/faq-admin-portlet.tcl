@@ -31,7 +31,7 @@ set list_of_package_ids $config(package_id)
 
 if {[llength $list_of_package_ids] > 1} {
     # We have a problem!
-    return -code error "There should be only one instance of FAQ for admin purposes"
+    return -code error [_ faq-portlet.one_admin_faq]
 }        
 
 set package_id [lindex $list_of_package_ids 0]
@@ -44,7 +44,7 @@ db_multirow faqs select_faqs {
     where f.faq_id = o.object_id
     and o.context_id = :package_id
 }
-	
+
 set url [lindex [site_node::get_url_from_object_id -object_id $package_id] 0]
 
 ad_return_template
