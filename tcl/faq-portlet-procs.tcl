@@ -114,7 +114,7 @@ namespace eval faq_portlet {
                         </tr>"
                         
                         db_foreach select_faqs $query {
-                            append template "<tr><td><a href=faq/one-faq?faq_id=$faq_id>$faq_name</a></td><td><a href=faq/one-question?entry_id=$entry_id>$question</a></td></tr>"
+                            append template "<tr><td><a href=[dotlrn_community::get_url_from_package_id -package_id $package_id]one-faq?faq_id=$faq_id>$faq_name</a></td><td><a href=[dotlrn_community::get_url_from_package_id -package_id $package_id]one-question?entry_id=$entry_id>$question</a></td></tr>"
                         }
                     } else {
                         # workspace no faqs
