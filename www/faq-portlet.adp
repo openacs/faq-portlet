@@ -18,26 +18,67 @@
 
 %>
 
-<if @shaded_p@ false>
+<if @shaded_p@ ne "t">
 
-  <if @no_faqs_p@ false>
+  <if @faqs:rowcount@ gt 0>
 
-    <if @one_instance_p@ eq 0>
-      <ul>
+<%
+    set new_package_id ""
+    set old_package_id ""
+%>
+
+    <if @one_instance_p@ false>
+      <table border="0" bgcolor="white" cellpadding="2" cellspacing="3" width="100%">
+        <tr>
+          <td><strong>Name</strong></td>
+          <td><strong>Group</strong></td>
+        </tr>
     </if>
-   
-    @data@
-  
-    <if @one_instance_p@ eq 0>
-      </ul>
+
+<multiple name="faqs">
+
+<% set new_package_id $faqs(package_id) %>
+
+    <if @one_instance_p@ false and @new_package_id@ ne @old_package_id@>
+      <tr>
+    </if>
+
+    <if @one_instance_p@>
+      <li>
+        <a href="@faqs.url@one-faq?faq_id=@faqs.faq_id@">@faqs.faq_name@</a>
+      </li>
+    </if>
+    <else>
+      <if @faqs.rownum@ odd>
+        <tr bgcolor="#ececec">
+      </if>
+      <else>
+        <tr bgcolor="#ffffff">
+      </else>
+        <td><a href="@faqs.url@one-faq?faq_id=@faqs.faq_id@">@faqs.faq_name@</a></td>
+        <td>@faqs.community_name@</td>
+      </tr>
+    </else>
+
+<%
+    set old_package_id $new_package_id
+%>
+
+    <if @one_instance_p@ false and @new_package_id@ ne @old_package_id@>
+      </tr>
+    </if>
+</multiple>
+
+    <if @one_instance_p@ false>
+      </table>
     </if>
 
   </if>
   <else>
-    <small>No FAQs</small>
+    No FAQs
   </else>
 
 </if>
 <else>
-  &nbsp;
+&nbsp;
 </else>
