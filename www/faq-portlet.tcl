@@ -46,7 +46,9 @@ foreach package_id $list_of_package_ids {
         append data "</ul>"
         
     } elseif {$one_instance_p} {
-        append data "<small>No FAQs available</small>"
+        # append data "<small>No FAQs available</small>"
+
+        # Ben wants to make this disappear, even if there is just one instance
     }
         
 }
