@@ -45,6 +45,6 @@ db_multirow faqs select_faqs {
     and o.context_id = :package_id
 }
 	
-set url [site_node::get_url_from_object_id -object_id $package_id]
+set url [lindex [site_node::get_url_from_object_id -object_id $package_id] 0]
 
 ad_return_template
