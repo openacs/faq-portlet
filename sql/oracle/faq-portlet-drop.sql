@@ -37,7 +37,7 @@ begin
   begin 
     select datasource_id into ds_id
       from portal_datasources
-     where name = 'faq-portlet';
+     where name = 'faq_portlet';
    exception when no_data_found then
      ds_id := null;
   end;
