@@ -68,10 +68,12 @@ namespace eval faq_portlet {
 
 	# things we need in the config: package_id
 
+	set package_id $config(package_id)
+	
    	set query "select f.faq_id, f.faq_name, entry_id, question
 	from acs_objects o, faqs f, faq_q_and_as qa
 	where object_id = f.faq_id
-        and context_id = $config(package_id)
+        and context_id = :package_id
         and qa.faq_id(+) = f.faq_id"
 	
 	set data ""
