@@ -47,41 +47,42 @@ namespace eval faq_portlet {
     }
 
     ad_proc -public add_self_to_page {
-        portal_id
-        faq_package_id
+        {-portal_id:required}
+        {-package_id:required}
     } {
-        Adds a faq PE to the given portal or appends the given faq_package_id to the 
+        Adds a faq PE to the given portal or appends the given faq_package_id to the
         params of the faq pe already there
 
         @param portal_id The page to add self to
         @param faq_package_id the id of the faq package for this community
+
         @return element_id The new element's id
     } {
         return [portal::add_element_or_append_id \
-                   -portal_id $portal_id \
-                   -portlet_name [get_my_name] \
-                   -key "package_id" \
-                   -value_id $faq_package_id \
-                   -pretty_name [get_pretty_name] \
-                   -force_region [ad_parameter "faq_portlet_force_region" [my_package_key]]
+            -portal_id $portal_id \
+            -portlet_name [get_my_name] \
+            -key package_id \
+            -value_id $package_id \
+            -pretty_name [get_pretty_name] \
+            -force_region [ad_parameter "faq_portlet_force_region" [my_package_key]] \
         ]
     }
 
     ad_proc -public remove_self_from_page {
         portal_id
-        faq_package_id
+        package_id
     } {
         Removes a faq PE from the given page or just the passed in faq_package_id parameter
         from the portlet (that has other faq_package_ids)
 
         @param portal_id The page to remove self from
-        @param faq_package_id
+        @param package_id
     } {
         portal::remove_element_or_remove_id \
-                -portal_id $portal_id \
-                -portlet_name [get_my_name] \
-                -key "package_id" \
-                -value_id $faq_package_id
+            -portal_id $portal_id \
+            -portlet_name [get_my_name] \
+            -key package_id \
+            -value_id $package_id
     }
 
     ad_proc -public show {
@@ -89,9 +90,9 @@ namespace eval faq_portlet {
     } {
     } {
         portal::show_proc_helper \
-                -package_key [my_package_key] \
-                -config_list $cf \
-                -template_src "faq-portlet"
+            -package_key [my_package_key] \
+            -config_list $cf \
+            -template_src "faq-portlet"
     }
 
 }

@@ -48,22 +48,23 @@ namespace eval faq_admin_portlet {
     }
 
     ad_proc -public add_self_to_page {
-        portal_id
-        faq_package_id
+        {-portal_id:required}
+        {-package_id:required}
     } {
         Adds a faq admin PE to the given admin portal. There should only
         ever be one of these portals on an admin page with only one faq_package_id
 
         @param portal_id The page to add self to
-        @param faq_package_id the id of the faq package
+        @param package_id the id of the faq package
+
         @return element_id The new element's id
     } {
         set element_id [portal::add_element \
-                -portal_id $portal_id \
-                -portlet_name [get_my_name]
+            -portal_id $portal_id \
+            -portlet_name [get_my_name] \
         ]
-        
-        portal::set_element_param $element_id "package_id" $faq_package_id
+
+        portal::set_element_param $element_id package_id $package_id
 
         return $element_id
     }
@@ -85,6 +86,5 @@ namespace eval faq_admin_portlet {
             -config_list $cf \
             -template_src "faq-admin-portlet"
     }
-
 
 }
