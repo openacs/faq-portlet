@@ -21,6 +21,7 @@ begin
     data_type        => 'tcl_proc',
     mime_type        => 'text/html',
     name             => 'faq-portlet',
+    link             => 'faq',
     description      => 'Displays the given folder_id ',
     content	     => 'faq_portlet::show',
     configurable_p   => 't'
