@@ -51,6 +51,7 @@ foreach package_id $list_of_package_ids {
         
 }
 
+# portlets shouldn't disappear anymore (ben)
 if {[empty_string_p $data]} {
     set data "<small>No FAQs</small>"
 }
