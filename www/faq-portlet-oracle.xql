@@ -13,4 +13,13 @@
     </querytext>
 </fullquery>
 
+<fullquery name="faqs_check">
+    <querytext>
+    select 1
+    from dual where exists (select 1 from acs_objects o, faqs f
+    where object_id = f.faq_id
+    and context_id = :package_id)
+    </querytext>
+</fullquery>
+
 </queryset>

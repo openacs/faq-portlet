@@ -37,22 +37,28 @@ foreach package_id $list_of_package_ids {
 
         set comm_url [dotlrn_community::get_url_from_package_id -package_id $package_id]
 
-        append data "$comm_name<P><ul>"
+        set f_check [db_0or1row faqs_check {}]
+        
+        if {!$one_instance_p && $f_check} { 
+            append data "<li>$comm_name"
+            append data "<ul>"
+        }
 
         db_foreach faqs_select {} {
             append data "<li><a href=${comm_url}one-faq?faq_id=$faq_id>$faq_name</a><br>"
         }
         
-        append data "</ul>"
+        if {!$one_instance_p && $f_check} { 
+            append data "</ul>"
+        }
         
-    } elseif {$one_instance_p} {
-        # append data "<small>No FAQs available</small>"
-    }
-        
+    }         
 }
 
 # portlets shouldn't disappear anymore (ben)
 if {[empty_string_p $data]} {
-    set data "<small>No FAQs</small>"
+    set no_faqs_p "t"
+} else {
+    set no_faqs_p "f"
 }
         
