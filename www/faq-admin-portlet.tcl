@@ -36,11 +36,15 @@ if {[llength $list_of_package_ids] > 1} {
 
 set package_id [lindex $list_of_package_ids 0]
 
-db_multirow faqs select_faqs "select f.faq_id, 
-f.faq_name from
-faqs f, acs_objects o
-where faq_id= object_id and context_id = :package_id"
+db_multirow faqs select_faqs {
+    select f.faq_id, 
+           f.faq_name
+    from faqs f,
+         acs_objects o
+    where f.faq_id = o.object_id
+    and o.context_id = :package_id
+}
 	
-set url [dotlrn_community::get_url_from_package_id -package_id $package_id]
+set url [site_node::get_url_from_object_id -object_id $package_id]
 
 ad_return_template
