@@ -63,43 +63,38 @@ namespace eval faq_portlet {
 
 	# things we need in the config: package_id
 
-	ns_log notice "AKS55 got here"
-
-	# a big-time query from file-storage
-	set query " select faq_id, faq_name
-	from acs_objects o, faqs f
-	where object_id = faq_id
+   	set query "select f.faq_id, f.faq_name, entry_id, question
+	from acs_objects o, faqs f, faq_q_and_as qa
+	where object_id = f.faq_id
         and context_id = $config(package_id)
-	order by faq_name"
+        and qa.faq_id(+) = f.faq_id"
 	
 	set data ""
 	set rowcount 0
 
-	db_foreach select_files_and_folders $query {
-	    append data "<tr><td>$faq_id</td><td>$faq_name</td></tr>"
+	db_foreach select_faqs $query {
+	    append data "<tr><td><a href=faq/one-faq?faq_id=$faq_id>$faq_name</a></td><td><a href=faq/one-question?entry_id=$entry_id>$question</a></td></tr>"
 	    incr rowcount
 	} 
 
 	set template "
 	<table width=100% border=1 cellpadding=2 cellspacing=2>
 	<tr>
-	<td bgcolor=#cccccc>faq_id</td>
-	<td bgcolor=#cccccc>Name</td>
+	<td bgcolor=#cccccc>FAQ</td>
+	<td bgcolor=#cccccc>Question</td>
 	</tr>
 	$data
-	</table>"
-
-	ns_log notice "AKS56 got here $rowcount"
+	</table>
+	<a href=faq>more...</a>"
 
 	if {!$rowcount} {
 	    set template "<i>No faqs available</i><P><a href=faq>more...</a>"
-	}
+	} 
 
 	set code [template::adp_compile -string $template]
 
 	set output [template::adp_eval code]
-	ns_log notice "AKS57 got here $output"
-	
+
 	return $output
 
     }
