@@ -59,14 +59,12 @@ namespace eval faq_admin_portlet {
 
         @return element_id The new element's id
     } {
-        set element_id [portal::add_element \
+        return [portal::add_element_parameters \
             -portal_id $portal_id \
             -portlet_name [get_my_name] \
+            -key package_id \
+            -value $package_id
         ]
-
-        portal::set_element_param $element_id package_id $package_id
-
-        return $element_id
     }
 
     ad_proc -public remove_self_from_page {
