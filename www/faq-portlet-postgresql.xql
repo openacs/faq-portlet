@@ -6,7 +6,7 @@
     <fullquery name="select_faqs">
         <querytext>
             select acs_objects.context_id as package_id,
-                   acs_object__name(acs_objects.context_id) as parent_name,
+                   acs_object__name(apm_package__parent_id(acs_objects.context_id)) as parent_name,
                    (select site_node__url(site_nodes.node_id)
                     from site_nodes
                     where site_nodes.object_id = acs_objects.context_id) as url,
@@ -15,8 +15,9 @@
             from faqs,
                  acs_objects
             where faqs.faq_id = acs_objects.object_id
+	    and faqs.disabled_p <> 't'
             and acs_objects.context_id in ([join $list_of_package_ids ", "])
-            order by parent_name
+            order by lower(faq_name)
         </querytext>
     </fullquery>
 

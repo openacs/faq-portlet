@@ -23,6 +23,12 @@
 <multiple name="faqs">
   <li>
     <a href="@url@admin/one-faq?faq_id=@faqs.faq_id@">@faqs.faq_name@</a>
+	<if @faqs.disabled_p@ eq "t">
+		(#faq-portlet.Disabled# | <a href=faq/admin/faq-enable?faq_id=@faqs.faq_id@&referer=@referer@>#faq-portlet.Enable#</a>)
+	</if>
+	<else>
+		 (<a href=faq/admin/faq-disable?faq_id=@faqs.faq_id@&referer=@referer@>#faq-portlet.Disable#</a>)
+	</else>
   </li>
 </multiple>
   <br>

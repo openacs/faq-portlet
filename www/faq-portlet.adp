@@ -28,10 +28,10 @@
 %>
 
     <if @one_instance_p@ false>
-      <table border="0" bgcolor="white" cellpadding="2" cellspacing="3" width="100%">
-        <tr>
-          <td><strong>#faq-portlet.name#</strong></td>
-          <td><strong>#faq-portlet.group#</strong></td>
+      <table border="0" bgcolor="white" cellpadding="2" cellspacing="0" width="100%">
+        <tr class="table-header">
+          <td><strong class="table-header">#faq-portlet.name#</strong></td>
+          <td><strong class="table-header">#faq-portlet.group#</strong></td>
         </tr>
     </if>
 
@@ -50,10 +50,10 @@
     </if>
     <else>
       <if @faqs.rownum@ odd>
-        <tr bgcolor="#eeeeee">
+        <tr class="odd">
       </if>
       <else>
-        <tr bgcolor="#ffffff">
+        <tr class="even">
       </else>
         <td><a href="@faqs.url@one-faq?faq_id=@faqs.faq_id@">@faqs.faq_name@</a></td>
         <td>@faqs.parent_name@</td>
