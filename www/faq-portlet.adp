@@ -34,6 +34,9 @@
           <td><strong class="table-header">#dotlrn.clubs_pretty_name#</strong></td>
         </tr>
     </if>
+    <else>
+      <ul>
+    </else>
 
 <multiple name="faqs">
 
@@ -70,6 +73,9 @@
     <if @one_instance_p@ false>
       </table>
     </if>
+    <else>
+      </ul>
+    </else>
 
   </if>
   <else>
