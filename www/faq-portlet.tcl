@@ -21,9 +21,13 @@ set list_of_package_ids $config(package_id)
 set data ""
 
 
-foreach package_id $list_of_package_ids {
+if {[llength $list_of_package_ids] == 1} {
+    set one_instance_p 1
+} else {
+    set one_instance_p 0
+}
 
-#    ad_return_complaint 1 "aks1 [db_string faq_q_and_as_count_select {} ] "
+foreach package_id $list_of_package_ids {
 
     if { [db_string faq_q_and_as_count_select {} ] != 0 } {
             
@@ -33,14 +37,17 @@ foreach package_id $list_of_package_ids {
 
         set comm_url [dotlrn_community::get_url_from_package_id -package_id $package_id]
 
-        append data "$comm_name<P>"
+        append data "$comm_name<P><ul>"
 
         db_foreach faqs_select {} {
-            append data "&nbsp;&nbsp;<a href=${comm_url}one-faq?faq_id=$faq_id>$faq_name</a><P>"
+            append data "<li><a href=${comm_url}one-faq?faq_id=$faq_id>$faq_name</a><P>"
         }
-    } else {
-            # workspace no faqs
-            set data "<small>No FAQs available</small>"
+        
+        append data "</ul>"
+        
+    } elseif {$one_instance_p} {
+        append data "<small>No FAQs available</small>"
     }
+        
 }
         
