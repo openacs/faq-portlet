@@ -43,12 +43,24 @@ namespace eval faq_portlet {
 	@author arjun@openforce.net
 	@creation-date Sept 2001
     } {
-	# Tell portal to add this element to the page
-	set element_id [portal::add_element $portal_id [my_name]]
-	
-	# The default param "package_id" must be configured
-	set key "package_id"
-	portal::set_element_param $element_id $key $package_id
+	# Find out if faq already exists on this portal page
+	set element_id_list \
+                [portal::get_element_ids_by_ds $portal_id [my_name]]
+
+	if {[llength $element_id_list] == 0} {
+	    # Tell portal to add this element to the page
+	    set element_id [portal::add_element $portal_id [my_name]]
+	    # There is already a value for the param which must be overwritten
+	    portal::set_element_param $element_id package_id $package_id
+	    set package_id_list [list]
+	} else {
+	    set element_id [lindex $element_id_list 0]
+	    # There are existing values which should NOT be overwritten
+	    portal::add_element_param_value \
+                    -element_id $element_id \
+                    -key package_id \
+                    -value $package_id
+	}
 
 	return $element_id
     }
@@ -66,50 +78,78 @@ namespace eval faq_portlet {
 
 	array set config $cf	
 
-	# things we need in the config: package_id
-
-	set package_id $config(package_id)
 	
-   	set query "select f.faq_id, f.faq_name, entry_id, question
+   	set query "select f.faq_id, 
+        f.faq_name, 
+        entry_id, 
+        question
 	from acs_objects o, faqs f, faq_q_and_as qa
 	where object_id = f.faq_id
         and context_id = :package_id
         and qa.faq_id(+) = f.faq_id"
 	
-	set data ""
-	set rowcount 0
+	# Should be a list already! 
+	set list_of_package_ids $config(package_id)
 
-	db_foreach select_faqs $query {
-	    append data "<tr><td><a href=faq/one-faq?faq_id=$faq_id>$faq_name</a></td><td><a href=faq/one-question?entry_id=$entry_id>$question</a></td></tr>"
-	    incr rowcount
-	} 
+        if { $config(shaded_p) == "t" } {
+            set data ""
+            set template ""
+        } else {
+            # not shaded
+            set template "
+            <table width=100% border=0 cellpadding=2 cellspacing=2>
+            "
 
-	set template "
-	<table width=100% border=1 cellpadding=2 cellspacing=2>
-	<tr>
-	<td bgcolor=#cccccc>FAQ</td>
-	<td bgcolor=#cccccc>Question</td>
-	</tr>
-	$data
-	</table>
-	<a href=faq>more...</a>"
+            if { [llength $list_of_package_ids] > 1 } {
+                # more than one package_id, we're in a workspace
+                foreach package_id $list_of_package_ids {
+                
+                    if { [db_string count_faqs "select count(*) from faq_q_and_as, acs_objects where context_id = :package_id and object_id=faq_id" ] != 0 } {
+                        # we have faqs
+                        append template "<tr><td colspan=2>Faqs from [db_string select_name "select name from site_nodes where node_id= (select parent_id from site_nodes where object_id=:package_id)" -default ""] (<a href=[dotlrn_community::get_url_from_package_id -package_id $package_id]>more</a>)<br></td></tr>"
+                    
+                        append template "<tr>
+                        <td bgcolor=#eeeee7>FAQ List</td>
+                        <td bgcolor=#eeeee7>One Question</td>
+                        </tr>"
+                        
+                        db_foreach select_faqs $query {
+                            append template "<tr><td><a href=faq/one-faq?faq_id=$faq_id>$faq_name</a></td><td><a href=faq/one-question?entry_id=$entry_id>$question</a></td></tr>"
+                        }
+                    } else {
+                        # workspace no faqs
+                    }
+                }
+            } else {
+                set package_id $config(package_id)
 
-	if {!$rowcount} {
-	    set template "<i>No faqs available</i><P><a href=faq>more...</a>"
-	} 
+                # not in workspace
+                if { [db_string count_faqs "select count(*) from faq_q_and_as, acs_objects where context_id = :package_id and object_id=faq_id" ] != 0 } {
+                    # we have faqs
+                    append template "<tr>
+                    <td bgcolor=#eeeee7>FAQ List</td>
+                    <td bgcolor=#eeeee7>One Question</td>
+                    </tr>"
 
-	if { $config(shaded_p) == "t" } {
-	    set data ""
-	    set template ""
-	}
-
-	set code [template::adp_compile -string $template]
-
-	set output [template::adp_eval code]
-
-	return $output
-
+                    db_foreach select_faqs $query {
+                        append template "<tr><td><a href=faq/one-faq?faq_id=$faq_id>$faq_name</a></td><td><a href=faq/one-question?entry_id=$entry_id>$question</a></td></tr>"
+                    } 
+                } else {
+                    # no faqs
+                    append template "<tr colspan=2><td><small><i>No faqs available</i></small><td></tr>"
+                }
+            }
+            append template "</table>"
+        }
+    
+        set code [template::adp_compile -string $template]
+    
+        set output [template::adp_eval code]
+        
+        return $output
+        
     }
+
 
     ad_proc -public edit { 
 	nothing here
