@@ -48,5 +48,4 @@ if {${faqs:rowcount} == 1} {
         where faq_id = :faq_id
         order by sort_key
     }
-
 }

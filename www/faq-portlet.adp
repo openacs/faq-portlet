@@ -18,7 +18,7 @@
 
 %>
 
-<if @shaded_p@ ne "t">
+<if @shaded_p@ false>
 
   <if @faqs:rowcount@ gt 1>
 
