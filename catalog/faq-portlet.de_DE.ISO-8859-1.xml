@@ -9,6 +9,6 @@
   <msg key="name">Name</msg>
   <msg key="new_faq">Neues FAQ erstellen</msg>
   <msg key="no_faqs">Keine FAQs vorhanden</msg>
-  <msg key="one_admin_faq">Es soll nur für Administrationszwecke ein Exemplar von FAQ geben</msg>
+  <msg key="one_admin_faq">Aus verwaltungstechnischen Gründen sollten die FAQs innerhalb einer Gruppe nur einmal eingesetzt werden. </msg>
   <msg key="pretty_name">Häufig gestellte Fragen (FAQs)</msg>
 </message_catalog>
