@@ -50,10 +50,10 @@
     </if>
     <else>
       <if @faqs.rownum@ odd>
-        <tr class="z_light">
+        <tr class="odd">
       </if>
       <else>
-        <tr class="z_dark">
+        <tr class="even">
       </else>
         <td><a href="@faqs.url@one-faq?faq_id=@faqs.faq_id@">@faqs.faq_name@</a></td>
         <td>@faqs.parent_name@</td>
