@@ -3,7 +3,7 @@
 
   <msg key="admin_pretty_name">FGyK Adminisztráció</msg>
   <msg key="Disable">Letilt</msg>
-  <msg key="Disabled">Kikapcsolva</msg>
+  <msg key="Disabled">Letiltott</msg>
   <msg key="Enable">Engedélyez</msg>
   <msg key="group">Csoport</msg>
   <msg key="name">Név</msg>

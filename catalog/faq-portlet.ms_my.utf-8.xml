@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <message_catalog package_key="faq-portlet" package_version="0.1a" locale="ms_my" charset="utf-8">
 
-  <msg key="admin_pretty_name">Penyeliaan FAQ</msg>
-  <msg key="Disable">Tidak Benarkan</msg>
-  <msg key="Disabled">Tidak dibenarkan</msg>
-  <msg key="Enable">Benarkan</msg>
-  <msg key="group">Kumpulan</msg>
-  <msg key="name">Nama</msg>
-  <msg key="new_faq">FAQ baru</msg>
   <msg key="no_faqs">Tiada FAQs</msg>
-  <msg key="one_admin_faq">Hanya satu set FAQ patut dihasilkan untuk tujuan penyeliaan</msg>
-  <msg key="pretty_name">Soalan-Soalan Sering Ditanya (FAQs)</msg>
 </message_catalog>
