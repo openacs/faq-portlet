@@ -97,9 +97,9 @@ begin
 
     -- create the implementation
     foo := acs_sc_impl.new(
-        'portal_datasource',
-        'faq_portlet',
-        'faq_portlet'
+        impl_contract_name => 'portal_datasource',
+        impl_name => 'faq_portlet',
+        impl_owner_name => 'faq_portlet'
     );
 
 
