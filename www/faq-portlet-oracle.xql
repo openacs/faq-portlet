@@ -5,11 +5,10 @@
 
 <fullquery name="faqs_select">
     <querytext>
-      select f.faq_id, f.faq_name, entry_id, question
-      from acs_objects o, faqs f, faq_q_and_as qa
+      select f.faq_id, f.faq_name
+      from acs_objects o, faqs f
       where object_id = f.faq_id
       and context_id = :package_id
-      and qa.faq_id(+) = f.faq_id
     </querytext>
 </fullquery>
 

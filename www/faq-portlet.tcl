@@ -62,8 +62,16 @@ if {[ad_parameter community_level_p] == 1} {
     
 } else {
     # i'm at /dotlrn, so have the table UI, hack
+
+    #
+    # this seems broken, but it was working ystr - aks 3/18 
+    #
+
+
+
     set one_instance_p 1
-    set data "<table border=\"0\" bgcolor=\"white\" cellpadding=\"2\" cellspacing=\"3\" width=\"100%\">
+    set data ""
+    set data_start "<table border=\"0\" bgcolor=\"white\" cellpadding=\"2\" cellspacing=\"3\" width=\"100%\">
     <tr>
                 <td><strong>Name</strong></td>
                 <td><strong>Group</strong></td>
@@ -91,8 +99,13 @@ if {[ad_parameter community_level_p] == 1} {
         }
     }
 
-    append data "</table>"
+    set data_end "</table>"
 
+    if {$count != 0} {
+        append $data_start $data $data_end
+    }
+
+    
 }
 
 # portlets shouldn't disappear anymore (ben)
