@@ -110,34 +110,17 @@ namespace eval faq_portlet {
 	  @author arjun@openforce.net
 	  @creation-date Sept 2001
     } {
-	# Find out the element_id that corresponds to this package_id
+	# get the element IDs (could be more than one!)
+	set element_ids [portal::get_element_ids_by_ds $portal_id [my_name]]
 
-	# XXX - fixme - the PE needs to find out it's own ID based on
-	# the datasource_id. Need a call in NPP to do this
-	
-	if { [db0or1row get_element_id "
-	select pem.element_id as element_id
-	from portal_element_parameters pep, 
-	portal_element_map pem
-	where pem.portal_id = $portal_id and
-	pep.element_id = pem.element_id and
-	pep.key = 'package_id' and
-	pep.value = $package_id
-	"]  } {
-	    
-	    # delete the params
-	    # delete the element from the map
-	    ns_log Notice "AKS58 faq-portlet-procs delete called"
-
-	 } else {
-	     ad_return_complaint 1 "faq_portlet::remove_self_from_page: Invalid portal_id  and/or package_id given."
-	     ad_script_abort
-	 }
-
-	 # this call removes the PEs params too
-	 set element_id [portal::remove_element {$portal_id $element_id}]
-     }
- }
+	# remove all elements
+	db_transaction {
+	    foreach element_id $element_ids {
+		portal::remove_element $element_id
+	    }
+	}
+    }
+}
 
  
 
