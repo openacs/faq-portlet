@@ -100,45 +100,41 @@ namespace eval faq_portlet {
             <table width=100% border=0 cellpadding=2 cellspacing=2>
             "
 
-            if { [llength $list_of_package_ids] > 1 } {
+#            if { [llength $list_of_package_ids] > 1 } {
                 # more than one package_id, we're in a workspace
-                foreach package_id $list_of_package_ids {
-                
-                    if { [db_string count_faqs "select count(*) from faq_q_and_as, acs_objects where context_id = :package_id and object_id=faq_id" ] != 0 } {
-                        # we have faqs
-                        append template "<tr><td colspan=2>Faqs from [db_string select_name "select name from site_nodes where node_id= (select parent_id from site_nodes where object_id=:package_id)" -default ""] (<a href=[dotlrn_community::get_url_from_package_id -package_id $package_id]>more</a>)<br></td></tr>"
-                    
-                        append template "<tr>
-                        <td bgcolor=#eeeee7>FAQ List</td>
-                        <td bgcolor=#eeeee7>One Question</td>
-                        </tr>"
-                        
-                        db_foreach select_faqs $query {
-                            append template "<tr><td><a href=[dotlrn_community::get_url_from_package_id -package_id $package_id]one-faq?faq_id=$faq_id>$faq_name</a></td><td><a href=[dotlrn_community::get_url_from_package_id -package_id $package_id]one-question?entry_id=$entry_id>$question</a></td></tr>"
-                        }
-                    } else {
-                        # workspace no faqs
-                    }
-                }
-            } else {
-                set package_id $config(package_id)
 
-                # not in workspace
-                if { [db_string count_faqs "select count(*) from faq_q_and_as, acs_objects where context_id = :package_id and object_id=faq_id" ] != 0 } {
-                    # we have faqs
-                    append template "<tr>
-                    <td bgcolor=#eeeee7>FAQ List</td>
-                    <td bgcolor=#eeeee7>One Question</td>
-                    </tr>"
-
-                    db_foreach select_faqs $query {
-                        append template "<tr><td><a href=faq/one-faq?faq_id=$faq_id>$faq_name</a></td><td><a href=faq/one-question?entry_id=$entry_id>$question</a></td></tr>"
-                    } 
-                } else {
-                    # no faqs
-                    append template "<tr colspan=2><td><small><i>No faqs available</i></small><td></tr>"
-                }
+    foreach package_id $list_of_package_ids {
+        
+        if { [db_string count_faqs "select count(*) as count from faq_q_and_as, acs_objects where context_id = :package_id and object_id=faq_id" ] != 0 } {
+            
+            append template "<tr><td colspan=2><b>[db_string select_name "select name from site_nodes where node_id= (select parent_id from site_nodes where object_id=:package_id)" -default ""]</b> (<a href=[dotlrn_community::get_url_from_package_id -package_id $package_id]>more</a>)<br></td></tr>"
+            
+            
+            db_foreach select_faqs $query {
+                append template "<tr><td><a href=[dotlrn_community::get_url_from_package_id -package_id $package_id]one-faq?faq_id=$faq_id>$faq_name</a></td></tr>"
             }
+        } else {
+            # workspace no faqs
+        }
+    }
+#           } else {
+#               set package_id $config(package_id)
+#
+#               # not in workspace
+#               if { [db_string count_faqs "select count(*) as faqcount from faq_q_and_as, acs_objects where context_id = :package_id and object_id=faq_id" ] != 0 } {
+#                   # we have faqs
+#                   append template "<tr>
+#                   <td bgcolor=#eeeee7>FAQ List</td>
+#                   </tr>"
+#
+#                   db_foreach select_faqs $query {
+#                       append template "<tr><td><a href=[dotlrn_community::get_url_from_package_id -package_id $package_id]one-faq?faq_id=$faq_id>$faq_name</a></td></tr>"
+#                   } 
+#               } else {
+#                   # no faqs
+#                   append template "<tr colspan=2><td><small><i>No faqs available</i></small><td></tr>"
+#               }
+#           }
             append template "</table>"
         }
     
@@ -170,14 +166,18 @@ namespace eval faq_portlet {
     } {
 	# get the element IDs (could be more than one!)
 	set element_ids [portal::get_element_ids_by_ds $portal_id [my_name]]
-
-	# remove all elements
+        
 	db_transaction {
 	    foreach element_id $element_ids {
-		portal::remove_element $element_id
+		# Highly simplified (ben)
+		portal::remove_element_param_value -element_id $element_id -key package_id -value $package_id
+
+		# Check if we should really remove the element
+		if {[llength [portal::get_element_param_list -element_id $element_id -key package_id]] == 0} {
+		    portal::remove_element $element_id
+		}
 	    }
 	}
-    }
 
     ad_proc -public make_self_available { 
  	portal_id 
