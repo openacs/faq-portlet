@@ -18,6 +18,7 @@
                  acs_objects
             where faqs.faq_id = acs_objects.object_id
             and acs_objects.context_id in ([join $list_of_package_ids ", "])
+            order by parent_name
         </querytext>
     </fullquery>
 
