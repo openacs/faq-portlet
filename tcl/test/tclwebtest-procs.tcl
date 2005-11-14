@@ -1,4 +1,4 @@
- 	ad_library {
+ad_library {
     Automated tests.
     @author Mounir Lallali
     @author Gerardo Morales
@@ -18,10 +18,6 @@ namespace eval faq_portlet::twt {}
 ad_proc faq_portlet::twt::new { faq_name } {
 
         set response 0
-	tclwebtest::cookies clear
-	# Login user
-	array set user_info [twt::user::create -admin]
-	twt::user::login $user_info(email) $user_info(password)
 	 
 	set dotlrn_page_url "[site_node::get_package_url -package_key dotlrn]admin"	 
 	::twt::do_request $dotlrn_page_url
@@ -49,21 +45,17 @@ ad_proc faq_portlet::twt::new { faq_name } {
 	} else {
 		aa_error "faq_portlet::twt::new failed, bad response url : $response_url"
 	}
-	twt::user::logout
+	
 	return $response
 }
 
 ad_proc faq_portlet::twt::delete { faq_name} {
 
         set response 0
-	tclwebtest::cookies clear
-
-	# Login user
-	array set user_info [twt::user::create -admin]
-	twt::user::login $user_info(email) $user_info(password)
 
 	set dotlrn_page_url "[site_node::get_package_url -package_key dotlrn]admin"	 
 	::twt::do_request $dotlrn_page_url
+	
 	tclwebtest::link follow "Classes"	
 
 	# Create a new FAQ		 
@@ -73,7 +65,7 @@ ad_proc faq_portlet::twt::delete { faq_name} {
 	tclwebtest::link follow {View All FAQs} 
 
 	db_1row faq_id "select faq_id from faqs where faq_name=:faq_name"
-	::twt::do_request [export_vars -base "faq-delete" {faq_id}]"
+	::twt::do_request [export_vars -base "faq-delete" {faq_id}]
 
 	set response_url [tclwebtest::response url]	
 	
@@ -87,20 +79,13 @@ ad_proc faq_portlet::twt::delete { faq_name} {
 	} else {
 		aa_error "faq_portlet::twt::delete failed, bad response url : $response_url"
 	}
-	twt::user::logout
+	
 	return $response
 }
 
-ad_proc faq_portlet::twt::disable_enable { faq_name option} {
+ad_proc faq_portlet::twt::disable_enable { faq_name option } {
 
         set response 0
-	# Option : disable or enable
-
-	tclwebtest::cookies clear
-
-	# Login user
-	array set user_info [twt::user::create -admin]
-	twt::user::login $user_info(email) $user_info(password)
 
 	set dotlrn_page_url "[site_node::get_package_url -package_key dotlrn]admin"	 
 	::twt::do_request $dotlrn_page_url
@@ -129,7 +114,7 @@ ad_proc faq_portlet::twt::disable_enable { faq_name option} {
 	} else {
 		aa_error "faq_portlet::twt::$option failed. Bad  response url : $response_url "
 	}
-	twt::user::logout
+	
 	return $response
 }
 
@@ -137,11 +122,6 @@ ad_proc faq_portlet::twt::disable_enable { faq_name option} {
 ad_proc faq_portlet::twt::edit_faq { faq_name faq_new_name } {
 
         set response 0
-	tclwebtest::cookies clear
-
-	# Login user
-	array set user_info [twt::user::create -admin]
-	twt::user::login $user_info(email) $user_info(password)
 
 	db_1row faq_id "select faq_id from faqs where faq_name=:faq_name"
 	 
@@ -173,19 +153,14 @@ ad_proc faq_portlet::twt::edit_faq { faq_name faq_new_name } {
 	} else {
 		aa_error "faq_portlet::twt::new failed, bad response url : $response_url"
 	}
-	twt::user::logout
+	
 	return $response
 }
 
 ad_proc faq_portlet::twt::new_Q_A { faq_name question answer} {
 
         set response 0
-	tclwebtest::cookies clear
 
-	# Login user
-	array set user_info [twt::user::create -admin]
-	twt::user::login $user_info(email) $user_info(password)
-		
 	set dotlrn_page_url "[site_node::get_package_url -package_key dotlrn]admin"	 
 	::twt::do_request $dotlrn_page_url
 	tclwebtest::link follow "Classes"
@@ -214,19 +189,13 @@ ad_proc faq_portlet::twt::new_Q_A { faq_name question answer} {
 	} else {
 		aa_error "dorlrn_faq::twt::new_Q_A failed. Bad  response url : $response_url"
 	}
-	twt::user::logout
+	
 	return $response
 }
-
 
 ad_proc faq_portlet::twt::delete_Q_A { faq_name question} {
 
         set response 0
-        tclwebtest::cookies clear
-
-        # Login user
-        array set user_info [twt::user::create -admin]
-        twt::user::login $user_info(email) $user_info(password)
 
         set dotlrn_page_url "[site_node::get_package_url -package_key dotlrn]admin"
         ::twt::do_request $dotlrn_page_url
@@ -252,6 +221,6 @@ ad_proc faq_portlet::twt::delete_Q_A { faq_name question} {
         } else {
                 aa_error "dorlrn_faq::twt::delete_Q_A failed. Bad  response url : $response_url"
         }
-        twt::user::logout
-        return $response
+        
+	return $response
     }
