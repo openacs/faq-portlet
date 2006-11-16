@@ -48,7 +48,7 @@
 
     <if @one_instance_p@>
       <li>
-        <a href="@faqs.url@one-faq?faq_id=@faqs.faq_id@">@faqs.faq_name@</a>
+        <a href="@faqs.url@one-faq?faq_id=@faqs.faq_id@" title="#faq-portlet.goto_faqs_faq_name#">@faqs.faq_name@</a>
       </li>
     </if>
     <else>
@@ -58,7 +58,7 @@
       <else>
         <tr class="even">
       </else>
-        <td><a href="@faqs.url@one-faq?faq_id=@faqs.faq_id@">@faqs.faq_name@</a></td>
+        <td><a href="@faqs.url@one-faq?faq_id=@faqs.faq_id@" title="#faq-portlet.goto_faqs_faq_name#">@faqs.faq_name@</a></td>
         <td>@faqs.parent_name@</td>
       </tr>
     </else>
@@ -80,7 +80,7 @@
   </if>
   <else>
     <if @faqs:rowcount@ eq 1>
-      <a href="@faq_url@one-faq?faq_id=@faq_id@">@faq_name@</a>
+      <a href="@faq_url@one-faq?faq_id=@faq_id@" title="#faq-portlet.goto_faq_name#">@faq_name@</a>
       <ul>
 <multiple name="questions">
         <li><a href="@faq_url@one-question?entry_id=@questions.entry_id@">@questions.question;noquote@</a></li>
