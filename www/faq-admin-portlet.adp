@@ -31,6 +31,7 @@
 	</else>
   </li>
 </multiple>
-  <br>
+</ul>
+<ul>
   <li><a href="@url@admin/faq-new">#faq-portlet.new_faq#</a></li>
 </ul>
