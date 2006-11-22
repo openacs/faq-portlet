@@ -83,7 +83,7 @@
       <a href="@faq_url@one-faq?faq_id=@faq_id@" title="#faq-portlet.goto_faq_name#">@faq_name@</a>
       <ul>
 <multiple name="questions">
-        <li><a href="@faq_url@one-question?entry_id=@questions.entry_id@">@questions.question;noquote@</a></li>
+        <li><a href="@faq_url@one-question?entry_id=@questions.entry_id@" title="#faq-portlet.display_q_and_a#">@questions.question;noquote@</a></li>
 </multiple>
       </ul>
     </if>

@@ -4,6 +4,7 @@
   <msg key="admin_pretty_name">FAQ Administration</msg>
   <msg key="Disable">Disable</msg>
   <msg key="Disabled">Disabled</msg>
+  <msg key="display_q_and_a">Display question and answer</msg>
   <msg key="Enable">Enable</msg>
   <msg key="goto_faq_name">Go to FAQ %faq_name%</msg>
   <msg key="goto_faqs_faq_name">Go to FAQ %faqs.faq_name%</msg>
