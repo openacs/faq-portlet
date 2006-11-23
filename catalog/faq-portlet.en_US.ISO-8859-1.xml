@@ -2,12 +2,16 @@
 <message_catalog package_key="faq-portlet" package_version="2.2.0" locale="en_US" charset="ISO-8859-1">
 
   <msg key="admin_pretty_name">FAQ Administration</msg>
+  <msg key="create_new_faq">Create a new FAQ</msg>
   <msg key="Disable">Disable</msg>
+  <msg key="disable_faqs_faq_name">Disable %faqs.faq_name%</msg>
   <msg key="Disabled">Disabled</msg>
   <msg key="display_q_and_a">Display question and answer</msg>
   <msg key="Enable">Enable</msg>
+  <msg key="enable_faqs_faq_name">Enable %faqs.faq_name%</msg>
   <msg key="goto_faq_name">Go to FAQ %faq_name%</msg>
   <msg key="goto_faqs_faq_name">Go to FAQ %faqs.faq_name%</msg>
+  <msg key="goto_faqs_faq_name_admin">Go to %faqs.faq_name% administration</msg>
   <msg key="group">Group</msg>
   <msg key="name">Name</msg>
   <msg key="new_faq">New FAQ</msg>
