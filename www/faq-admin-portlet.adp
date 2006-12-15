@@ -22,15 +22,16 @@
 <ul>
 <multiple name="faqs">
   <li>
-    <a href="@url@admin/one-faq?faq_id=@faqs.faq_id@">@faqs.faq_name@</a>
+    <a href="@url@admin/one-faq?faq_id=@faqs.faq_id@" title="#faq-portlet.goto_faqs_faq_name_admin#">@faqs.faq_name@</a>
 	<if @faqs.disabled_p@ eq "t">
-		(#faq-portlet.Disabled# | <a href=faq/admin/faq-enable?faq_id=@faqs.faq_id@&referer=@referer@>#faq-portlet.Enable#</a>)
+		(#faq-portlet.Disabled# | <a href="faq/admin/faq-enable?faq_id=@faqs.faq_id@&referer=@referer@" title="#faq-portlet.enable_faqs_faq_name#">#faq-portlet.Enable#</a>)
 	</if>
 	<else>
-		 (<a href=faq/admin/faq-disable?faq_id=@faqs.faq_id@&referer=@referer@>#faq-portlet.Disable#</a>)
+		 (<a href="faq/admin/faq-disable?faq_id=@faqs.faq_id@&referer=@referer@" title="#faq-portlet.disable_faqs_faq_name#">#faq-portlet.Disable#</a>)
 	</else>
   </li>
 </multiple>
-  <br>
-  <li><a href="@url@admin/faq-new">#faq-portlet.new_faq#</a></li>
+</ul>
+<ul>
+  <li><a href="@url@admin/faq-new" title="#faq-portlet.create_new_faq#">#faq-portlet.new_faq#</a></li>
 </ul>
