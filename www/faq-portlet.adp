@@ -19,80 +19,23 @@
 %>
 
 <if @shaded_p@ false>
-
-  <if @faqs:rowcount@ gt 1>
-
-<%
-    set new_package_id ""
-    set old_package_id ""
-%>
-
-    <if @one_instance_p@ false>
-      <table border="0" bgcolor="white" cellpadding="2" cellspacing="0" width="100%">
-        <tr class="table-header">
-          <td><strong class="table-header">#faq-portlet.name#</strong></td>
-          <td><strong class="table-header">#dotlrn.clubs_pretty_name#</strong></td>
-        </tr>
-    </if>
-    <else>
-      <ul>
-    </else>
-
-<multiple name="faqs">
-
-<% set new_package_id $faqs(package_id) %>
-
-    <if @one_instance_p@ false and @new_package_id@ ne @old_package_id@>
-      <tr>
-    </if>
-
-    <if @one_instance_p@>
-      <li>
-        <a href="@faqs.url@one-faq?faq_id=@faqs.faq_id@" title="#faq-portlet.goto_faqs_faq_name#">@faqs.faq_name@</a>
-      </li>
-    </if>
-    <else>
-      <if @faqs.rownum@ odd>
-        <tr class="odd">
+      <if @faqs:rowcount@ eq 1>
+       <a href="@faq_url@one-faq?faq_id=@faq_id@">@faq_name@</a>
+       <ul>
+        <multiple name="questions">
+         <li><a href="@faq_url@one-question?entry_id=@questions.entry_id@">@questions.question;noquote@</a></li>
+        </multiple>
+       </ul>
       </if>
-      <else>
-        <tr class="even">
-      </else>
-        <td><a href="@faqs.url@one-faq?faq_id=@faqs.faq_id@" title="#faq-portlet.goto_faqs_faq_name#">@faqs.faq_name@</a></td>
-        <td>@faqs.parent_name@</td>
-      </tr>
-    </else>
-
-<% set old_package_id $new_package_id %>
-
-    <if @one_instance_p@ false and @new_package_id@ ne @old_package_id@>
-      </tr>
-    </if>
-</multiple>
-
-    <if @one_instance_p@ false>
-      </table>
-    </if>
-    <else>
-      </ul>
-    </else>
-
-  </if>
-  <else>
-    <if @faqs:rowcount@ eq 1>
-      <a href="@faq_url@one-faq?faq_id=@faq_id@" title="#faq-portlet.goto_faq_name#">@faq_name@</a>
-      <ul>
-<multiple name="questions">
-        <li><a href="@faq_url@one-question?entry_id=@questions.entry_id@" title="#faq-portlet.display_q_and_a#">@questions.question;noquote@</a></li>
-</multiple>
-      </ul>
-    </if>
-    <else>
-      <small>#faq-portlet.no_faqs#</small>
-    </else>
-  </else>
-
+      <if @faqs:rowcount@ eq 0>
+       <small>#faq-portlet.no_faqs#</small>
+      </if>
+      <if @faqs:rowcount@ gt 1>
+       <listtemplate name="faqs" style="groups"></listtemplate>
+      </if>
 </if>
 <else>
-  &nbsp;
+   <small>
+    #new-portal.when_portlet_shaded#
+  </small>
 </else>
