@@ -31,7 +31,7 @@
        <small>#faq-portlet.no_faqs#</small>
       </if>
       <if @faqs:rowcount@ gt 1>
-       <listtemplate name="faqs" style="groups"></listtemplate>
+       <listtemplate name="faqs"></listtemplate>
       </if>
 </if>
 <else>
