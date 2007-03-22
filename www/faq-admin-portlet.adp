@@ -19,6 +19,7 @@
 %>
 
 
+<if @faqs:rowcount@ gt 0>
 <ul>
 <multiple name="faqs">
   <li>
@@ -32,6 +33,8 @@
   </li>
 </multiple>
 </ul>
+</if>
+
 <ul>
   <li><a href="@url@admin/faq-new" title="#faq-portlet.create_new_faq#">#faq-portlet.new_faq#</a></li>
 </ul>
