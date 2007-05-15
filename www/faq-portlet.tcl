@@ -30,6 +30,19 @@ set shaded_p $config(shaded_p)
 set list_of_package_ids $config(package_id)
 set one_instance_p [ad_decode [llength $list_of_package_ids] 1 1 0]
 
+template::list::create -name faqs -multirow faqs -key faq_id -html {width 100%} -pass_properties {
+} -elements {
+    item {
+        label ""
+        display_template {
+	<b>@faqs.parent_name@</b><br/>    
+         <group column="package_id">
+	   &raquo; <a href="@faqs.url@one-faq?faq_id=@faqs.faq_id@">@faqs.faq_name@</a><br/>
+	 </group>
+        }
+    }
+}
+
 db_multirow faqs select_faqs {}
 
 if {${faqs:rowcount} == 1} {
