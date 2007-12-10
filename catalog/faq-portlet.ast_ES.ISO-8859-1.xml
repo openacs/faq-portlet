@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<message_catalog package_key="faq-portlet" package_version="2.3.0" locale="ast_ES" charset="ISO-8859-1">
+<message_catalog package_key="faq-portlet" locale="ast_ES" charset="ISO-8859-1">
 
   <msg key="admin_pretty_name">Alministración de FAQ</msg>
   <msg key="Disable">Desactivar</msg>
