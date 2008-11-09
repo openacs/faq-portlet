@@ -35,9 +35,9 @@ template::list::create -name faqs -multirow faqs -key faq_id -html {width 100%} 
     item {
         label ""
         display_template {
-	<b>@faqs.parent_name@</b><br/>    
+	<b>@faqs.parent_name@</b><br>    
          <group column="package_id">
-	   &raquo; <a href="@faqs.url@one-faq?faq_id=@faqs.faq_id@">@faqs.faq_name@</a><br/>
+	   &raquo; <a href="@faqs.url@one-faq?faq_id=@faqs.faq_id@">@faqs.faq_name@</a><br>
 	 </group>
         }
     }

@@ -38,7 +38,7 @@ if {[llength $list_of_package_ids] > 1} {
 
 set package_id [lindex $list_of_package_ids 0]
 
-db_multirow faqs select_faqs {
+db_multirow -extend {faq_enable_url faq_disable_url} faqs select_faqs {
     select f.faq_id, 
            f.faq_name,
            f.disabled_p
@@ -46,6 +46,11 @@ db_multirow faqs select_faqs {
          acs_objects o
     where f.faq_id = o.object_id
     and o.context_id = :package_id
+} {
+
+    set faq_enable_url [export_vars -base "faq/admin/faq-enable" {faq_id referer}]
+    set faq_disable_url [export_vars -base "faq/admin/faq-disable" {faq_id referer}]
+
 }
 
 set url [lindex [site_node::get_url_from_object_id -object_id $package_id] 0]
