@@ -27,15 +27,10 @@
         </multiple>
        </ul>
       </if>
-      <if @faqs:rowcount@ eq 0>
-       <small>#faq-portlet.no_faqs#</small>
-      </if>
-      <if @faqs:rowcount@ gt 1>
+      <else>
        <listtemplate name="faqs"></listtemplate>
-      </if>
+      </else>
 </if>
 <else>
-   <small>
     #new-portal.when_portlet_shaded#
-  </small>
 </else>
