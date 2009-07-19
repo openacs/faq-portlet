@@ -7,14 +7,14 @@
     <initial-install-p>f</initial-install-p>
     <singleton-p>t</singleton-p>
 
-    <version name="2.5.0d1" url="http://openacs.org/repository/download/apm/faq-portlet-2.5.0d1.apm">
+    <version name="2.5.0a1" url="http://openacs.org/repository/download/apm/faq-portlet-2.5.0a1.apm">
         <owner url="http://openacs.org">OpenACS</owner>
-        <release-date>2008-10-18</release-date>
+        <release-date>2009-07-22</release-date>
         <vendor url="http://openacs.org">OpenACS</vendor>
 
-        <provides url="faq-portlet" version="2.5.0d1"/>
+        <provides url="faq-portlet" version="2.5.0a1"/>
         <requires url="faq" version="5.2.0d4"/>
-        <requires url="new-portal" version="2.5.0d1"/>
+        <requires url="new-portal" version="2.5.0a1"/>
 
         <parameters>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="faq_portlet_force_region"  default="1" description="the portal region to put the faq portlet into"/>
