@@ -27,76 +27,83 @@
 -- 29 June 2002
 
 
-create function inline_0 ()
-returns integer as '
-declare
+
+
+--
+-- procedure inline_0/0
+--
+CREATE OR REPLACE FUNCTION inline_0(
+
+) RETURNS integer AS $$
+DECLARE
   ds_id 	portal_datasources.datasource_id%TYPE;
-begin
+BEGIN
 	ds_id = portal_datasource__new(
-        		''faq_portlet'',
-        		''Displays a FAQ''
+        		'faq_portlet',
+        		'Displays a FAQ'
 	);
 
 
 perform  portal_datasource__set_def_param(
 		ds_id,
-		''t'',
-		''t'',
-		''shadeable_p'',
-		''t''
+		't',
+		't',
+		'shadeable_p',
+		't'
 );
 
 perform portal_datasource__set_def_param (
 		ds_id,
-		''t'',
-		''t'',
-		''hideable_p'',
-		''t''
+		't',
+		't',
+		'hideable_p',
+		't'
 );
 
 perform portal_datasource__set_def_param (
 		ds_id,
-		''t'',
-		''t'',
-		''user_editable_p'',
-		''f''
+		't',
+		't',
+		'user_editable_p',
+		'f'
 );
 
 perform portal_datasource__set_def_param (
 		ds_id,
-		''t'',
-		''t'',
-		''shaded_p'',
-		''f''
+		't',
+		't',
+		'shaded_p',
+		'f'
 );
 
 perform portal_datasource__set_def_param (
 		ds_id,
-		''t'',
-		''t'',
-		''link_hideable_p'',
-		''t''
+		't',
+		't',
+		'link_hideable_p',
+		't'
 );
 
 perform portal_datasource__set_def_param (
 		ds_id,
-		''t'',
-		''t'',
-		''style'',
-		''list''
+		't',
+		't',
+		'style',
+		'list'
 );
 
 perform portal_datasource__set_def_param (
 		ds_id,
-		''t'',
-		''f'',
-		''package_id'',
-		'' ''
+		't',
+		'f',
+		'package_id',
+		' '
 );
 
 return 0;
 
-end; ' language 'plpgsql';
+END; 
+$$ LANGUAGE plpgsql;
 
 select inline_0 ();
 
