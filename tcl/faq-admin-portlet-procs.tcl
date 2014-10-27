@@ -21,7 +21,7 @@ ad_library {
     @creation-date January 19 2002
     @author Arjun Sanyal (arjun@openforce.net)
     @author Ben Adida (ben@openforce.net)
-    @version $Id$
+    @cvs-id $Id$
 
 }
 
