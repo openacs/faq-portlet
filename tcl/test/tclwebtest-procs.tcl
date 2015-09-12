@@ -224,3 +224,9 @@ ad_proc faq_portlet::twt::delete_Q_A { faq_name question} {
         
 	return $response
     }
+
+# Local variables:
+#    mode: tcl
+#    tcl-indent-level: 4
+#    indent-tabs-mode: nil
+# End:
