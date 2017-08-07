@@ -56,3 +56,9 @@ db_multirow -extend {faq_enable_url faq_disable_url} faqs select_faqs {
 set url [lindex [site_node::get_url_from_object_id -object_id $package_id] 0]
 
 ad_return_template
+
+# Local variables:
+#    mode: tcl
+#    tcl-indent-level: 4
+#    indent-tabs-mode: nil
+# End:

@@ -18,7 +18,7 @@
 
 %>
 
-<if @shaded_p@ false>
+<if @shaded_p;literal@ false>
       <if @faqs:rowcount@ eq 1>
        <a href="@faq_url@one-faq?faq_id=@faq_id@">@faq_name@</a>
        <ul>

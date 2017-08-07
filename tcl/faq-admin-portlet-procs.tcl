@@ -86,3 +86,9 @@ namespace eval faq_admin_portlet {
     }
 
 }
+
+# Local variables:
+#    mode: tcl
+#    tcl-indent-level: 4
+#    indent-tabs-mode: nil
+# End:
