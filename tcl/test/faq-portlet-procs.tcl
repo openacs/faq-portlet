@@ -28,7 +28,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest  tclwebtest_new_faq_por
 
 aa_register_case -cats {web smoke} -libraries tclwebtest  tclwebtest_delete_faq_portlet {
 
-    Testing the process of creating and deleteing a Faq from the portlet.
+    Testing the process of creating and deleting a Faq from the portlet.
 
 } {
 	aa_run_with_teardown -test_code {
