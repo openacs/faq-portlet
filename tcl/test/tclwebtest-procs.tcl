@@ -187,7 +187,7 @@ ad_proc faq_portlet::twt::new_Q_A { faq_name question answer} {
 		        set response 1
 		}
 	} else {
-		aa_error "dorlrn_faq::twt::new_Q_A failed. Bad  response url : $response_url"
+		aa_error "dotlrn_faq::twt::new_Q_A failed. Bad  response url : $response_url"
 	}
 	
 	return $response
@@ -219,7 +219,7 @@ ad_proc faq_portlet::twt::delete_Q_A { faq_name question} {
                         set response 1
 	    }
         } else {
-                aa_error "dorlrn_faq::twt::delete_Q_A failed. Bad  response url : $response_url"
+                aa_error "dotlrn_faq::twt::delete_Q_A failed. Bad  response url : $response_url"
         }
         
 	return $response
