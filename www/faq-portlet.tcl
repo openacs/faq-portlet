@@ -40,7 +40,22 @@ template::list::create -name faqs -multirow faqs -key faq_id -no_data [_ faq-por
     }
 }
 
-db_multirow -extend { faq_url } faqs select_faqs {} {
+db_multirow -extend { faq_url parent_name url } faqs select_faqs [subst {
+    select f.faq_id,
+           f.faq_name,
+           o.context_id as package_id
+      from faqs f,
+           acs_objects o
+    where f.faq_id = o.object_id
+      and not f.disabled_p
+      and o.object_id in ([join $list_of_package_ids ", "])
+    order by lower(faq_name)
+}] {
+    set node [site_node::get_from_object_id -object_id $package_id]
+    set url [dict get $node url]
+    set parent_node [site_node::get -node_id [dict get $node parent_id]]
+    set parent_name [acs_object_name [dict get $parent_node object_id]]
+    
     set faq_url [export_vars -base "${url}one-faq" {faq_id}]
 }
 
