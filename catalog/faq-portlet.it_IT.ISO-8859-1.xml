@@ -2,13 +2,20 @@
 <message_catalog package_key="faq-portlet" locale="it_IT" charset="ISO-8859-1">
 
   <msg key="admin_pretty_name">Amministrazione FAQ</msg>
+  <msg key="create_new_faq">Crea una nuova FAQ</msg>
   <msg key="Disable">Disabilita</msg>
+  <msg key="disable_faqs_faq_name">Disabilita %faqs.faq_name%</msg>
   <msg key="Disabled">Disabilitato</msg>
+  <msg key="display_q_and_a">Mostra domanda e risposta</msg>
   <msg key="Enable">Abilita</msg>
+  <msg key="enable_faqs_faq_name">Abilita %faqs.faq_name%</msg>
+  <msg key="goto_faq_name">Vai alla FAQ %faq_name%</msg>
+  <msg key="goto_faqs_faq_name">Vai alla FAQ %faqs.faq_name%</msg>
+  <msg key="goto_faqs_faq_name_admin">Vai all&#39;amministrazione di %faqs.faq_name%</msg>
   <msg key="group">Gruppo</msg>
   <msg key="name">Nome</msg>
   <msg key="new_faq">Nuova FAQ</msg>
   <msg key="no_faqs">Nessuna FAQ</msg>
-  <msg key="one_admin_faq">Ci dovrebbe essere un'unica istanza FAQ per scopi amministrativi</msg>
+  <msg key="one_admin_faq">Ci dovrebbe essere un&#39;unica istanza FAQ per scopi amministrativi</msg>
   <msg key="pretty_name">Domande Ricorrenti (FAQ)</msg>
 </message_catalog>
