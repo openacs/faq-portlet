@@ -20,7 +20,7 @@ ad_page_contract {
     The logic for the faq portlet.
 
     @creation-user Arjun Sanyal (arjun@openforce.net)
-    @version $Id$
+    @cvs-id $Id$
 } -query {
 }
 
