@@ -19,7 +19,7 @@
 ad_page_contract {
     The logic for the faq portlet.
 
-    @creation-user Arjun Sanyal (arjun@openforce.net)
+    @author Arjun Sanyal (arjun@openforce.net)
     @cvs-id $Id$
 } -query {
 }
@@ -55,7 +55,7 @@ db_multirow -extend { faq_url parent_name url } faqs select_faqs [subst {
     set url [dict get $node url]
     set parent_node [site_node::get -node_id [dict get $node parent_id]]
     set parent_name [acs_object_name [dict get $parent_node object_id]]
-    
+
     set faq_url [export_vars -base "${url}one-faq" {faq_id}]
 }
 
