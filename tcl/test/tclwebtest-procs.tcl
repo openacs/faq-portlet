@@ -15,7 +15,7 @@ ad_library {
 
 namespace eval faq_portlet::twt {}
 
-ad_proc faq_portlet::twt::new { faq_name } {
+ad_proc -private faq_portlet::twt::new { faq_name } {
 
         set response 0
 	 
@@ -49,7 +49,7 @@ ad_proc faq_portlet::twt::new { faq_name } {
 	return $response
 }
 
-ad_proc faq_portlet::twt::delete { faq_name} {
+ad_proc -private faq_portlet::twt::delete { faq_name} {
 
         set response 0
 
@@ -83,7 +83,7 @@ ad_proc faq_portlet::twt::delete { faq_name} {
 	return $response
 }
 
-ad_proc faq_portlet::twt::disable_enable { faq_name option } {
+ad_proc -private faq_portlet::twt::disable_enable { faq_name option } {
 
         set response 0
 
@@ -119,7 +119,7 @@ ad_proc faq_portlet::twt::disable_enable { faq_name option } {
 }
 
 
-ad_proc faq_portlet::twt::edit_faq { faq_name faq_new_name } {
+ad_proc -private faq_portlet::twt::edit_faq { faq_name faq_new_name } {
 
         set response 0
 
@@ -157,7 +157,7 @@ ad_proc faq_portlet::twt::edit_faq { faq_name faq_new_name } {
 	return $response
 }
 
-ad_proc faq_portlet::twt::new_Q_A { faq_name question answer} {
+ad_proc -private faq_portlet::twt::new_Q_A { faq_name question answer} {
 
         set response 0
 
@@ -193,7 +193,7 @@ ad_proc faq_portlet::twt::new_Q_A { faq_name question answer} {
 	return $response
 }
 
-ad_proc faq_portlet::twt::delete_Q_A { faq_name question} {
+ad_proc -private faq_portlet::twt::delete_Q_A { faq_name question} {
 
         set response 0
 
