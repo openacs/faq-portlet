@@ -38,10 +38,14 @@ namespace eval faq_portlet {
 
     ad_proc -public get_pretty_name {
     } {
+        Get pretty name.
+    } {
         return "#faq-portlet.pretty_name#"
     }
 
     ad_proc -public link {
+    } {
+        Get link. This is currently empty.
     } {
         return ""
     }
@@ -52,7 +56,7 @@ namespace eval faq_portlet {
         {-param_action:required}
     } {
         Adds a faq PE to the given portal or appends the given
-        faq_package_id to the params of the faq pe already there
+        faq_package_id to the params of the faq pe already there.
 
         @param portal_id The page to add self to
         @param faq_package_id the id of the faq package for this community
@@ -78,7 +82,7 @@ namespace eval faq_portlet {
     } {
         Removes a faq PE from the given page or just the passed
         in faq_package_id parameter from the portlet
-        (that has other faq_package_ids)
+        (that has other faq_package_ids).
 
         @param portal_id The page to remove self from
         @param package_id
@@ -93,6 +97,7 @@ namespace eval faq_portlet {
     ad_proc -public show {
         cf
     } {
+        Show the FAQ admin portlet.
     } {
         portal::show_proc_helper \
             -package_key [my_package_key] \
