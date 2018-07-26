@@ -59,7 +59,7 @@ namespace eval faq_portlet {
         faq_package_id to the params of the faq pe already there.
 
         @param portal_id The page to add self to
-        @param faq_package_id the id of the faq package for this community
+        @param package_id the id of the faq package for this community
 
         @return element_id The new element's id
     } {
