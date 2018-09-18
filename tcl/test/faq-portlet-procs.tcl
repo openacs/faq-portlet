@@ -52,7 +52,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest  tclwebtest_delete_faq_
 
 aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_disable_faq_portlet {
 
-    Testing the process of creating and disableing a Faq. 
+    Testing the process of creating and disabling a Faq. 
 
 } {
 	aa_run_with_teardown -test_code {
@@ -77,7 +77,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_disable_faq_
 
 aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_enable_faq_portlet {
 
-    Testing the process of creating, desableing and enableing Faq. 
+    Testing the process of creating, disabling and enabling Faq. 
 
 } {
 	aa_run_with_teardown -test_code {

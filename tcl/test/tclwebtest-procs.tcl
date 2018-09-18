@@ -31,13 +31,13 @@ ad_proc -private faq_portlet::twt::new { faq_name } {
 	tclwebtest::field find ~n "faq_name"
 	tclwebtest::field fill "$faq_name"
 	tclwebtest::form submit
-	aa_log "Faq form submited"
+	aa_log "Faq form submitted"
 
 	set response_url [tclwebtest::response url]	
 	
 	if {[string match "*/dotlrn/classes*/faq/admin*" $response_url] } {
 		if {[catch {tclwebtest::link find "$faq_name"} errmsg] } {
-			aa_error  "faq_portlet::twt::new failed $errmsg : Did't create a New Faq"
+			aa_error  "faq_portlet::twt::new failed $errmsg : Didn't create a New Faq"
 		} else {
 			aa_log "New faq Created !!"
 		        set response 1
@@ -71,7 +71,7 @@ ad_proc -private faq_portlet::twt::delete { faq_name} {
 	
 	if { [string match "*/faq/admin/index" $response_url] } {
 		if {![catch {tclwebtest::link find "$faq_name" } errmsg]} {
-			aa_error "faq_portlet::twt::delete failed $errmsg : Did't delete $faq_name Faq"
+			aa_error "faq_portlet::twt::delete failed $errmsg : Didn't delete $faq_name Faq"
 		} else {
 			aa_log "Faq Deleted"
 		        set response 1
@@ -106,7 +106,7 @@ ad_proc -private faq_portlet::twt::disable_enable { faq_name option } {
 
 	if {[string match "*/dotlrn/classes*/faq/admin*" $response_url] } {
 		if {! [catch {tclwebtest::link find ~u $url_option } errmsg]} {
-			aa_error "faq_portlet::twt::$option failed $errmsg : Did't $option $faq_name Faq"
+			aa_error "faq_portlet::twt::$option failed $errmsg : Didn't $option $faq_name Faq"
 		} else {
 			aa_log "Faq $option"
 		        set response 1
@@ -139,13 +139,13 @@ ad_proc -private faq_portlet::twt::edit_faq { faq_name faq_new_name } {
 	tclwebtest::field find ~n "faq_name"
 	tclwebtest::field fill "$faq_new_name"
 	tclwebtest::form submit	
-	aa_log " Faq form submited"
+	aa_log " Faq form submitted"
 
 	set response_url [tclwebtest::response url]	
 	
 	if {[string match "*/faq/admin/one-faq*" $response_url] } {
 		if { [catch {tclwebtest::form find ~n "faq_add_edit"} errmsg] || [catch {tclwebtest::field find ~v "$faq_new_name"} errmsg] } {
-			aa_error  "faq_portlet::twt::edit_faq failed $errmsg : Did't Edit the Faq"
+			aa_error  "faq_portlet::twt::edit_faq failed $errmsg : Didn't Edit the Faq"
 		} else {
 		    aa_log "Faq Edited"
 		    set response 1
@@ -175,13 +175,13 @@ ad_proc -private faq_portlet::twt::new_Q_A { faq_name question answer} {
 	tclwebtest::field find ~n "answer"
 	tclwebtest::field fill "$answer"
 	tclwebtest::form submit	
-	aa_log " Faq Question Form submited"
+	aa_log " Faq Question Form submitted"
 	
 	set response_url [tclwebtest::response url]
 
 	if { [string match "*/faq/admin/one-faq*" $response_url] } {
 		if { [catch {tclwebtest::assert text "$question"} errmsg] } { 
-		    aa_error "faq_portlet::twt::new_Q_A :  failed $errmsg : Did't Create a New Question"
+		    aa_error "faq_portlet::twt::new_Q_A :  failed $errmsg : Didn't Create a New Question"
 		} else {
 			aa_log "New Faq Question Created"	
 		        set response 1
@@ -213,7 +213,7 @@ ad_proc -private faq_portlet::twt::delete_Q_A { faq_name question} {
 
         if { [string match "*/faq/admin/one-faq*" $response_url] } {
 	    if { [catch {tclwebtest::assert text -fail "$question"} errmsg] } {
-                        aa_error "faq_portlet::twt::delete_Q_A :  failed $errmsg : Did't Delete a Question"
+                        aa_error "faq_portlet::twt::delete_Q_A :  failed $errmsg : Didn't Delete a Question"
 	    } else {
                         aa_log "Faq Question Deleted"
                         set response 1
