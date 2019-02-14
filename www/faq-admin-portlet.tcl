@@ -16,9 +16,9 @@
 
 ad_page_contract {
     The display logic for the FAQ admin portlet
-    
+
     @author Ben Adida (ben@openforce)
-    @cvs_id $Id$
+    @cvs-id $Id$
 } -properties {
     
 }
