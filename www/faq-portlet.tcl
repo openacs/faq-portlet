@@ -28,7 +28,7 @@ array set config $cf
 
 set shaded_p $config(shaded_p)
 set list_of_package_ids $config(package_id)
-set one_instance_p [ad_decode [llength $list_of_package_ids] 1 1 0]
+set one_instance_p [expr {[llength $list_of_package_ids] == 1}]
 
 template::list::create -name faqs -multirow faqs -key faq_id -no_data [_ faq-portlet.no_faqs] -elements {
     faq_name {
