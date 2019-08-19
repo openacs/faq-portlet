@@ -116,7 +116,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_edit_faq_por
         array set user_info [twt::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
-        # Creat a new faq
+        # Create a new faq
         set faq_name [ad_generate_random_string]
         faq_portlet::twt::new $faq_name
 
@@ -141,7 +141,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_new_Q_A_faq_
         array set user_info [twt::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
-        # Creat a new faq
+        # Create a new faq
         set faq_name [ad_generate_random_string]
         faq_portlet::twt::new $faq_name
 
@@ -167,7 +167,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_delete_Q_A_f
         array set user_info [twt::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
-        # Creat a new faq
+        # Create a new faq
         set faq_name [ad_generate_random_string]
         faq_portlet::twt::new $faq_name
 
