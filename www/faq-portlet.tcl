@@ -70,8 +70,8 @@ if {${faqs:rowcount} == 1} {
                faq_id,
                question,
                answer,
-               sort_key 
-        from faq_q_and_as 
+               sort_key
+        from faq_q_and_as
         where faq_id = :faq_id
         order by sort_key
     }
