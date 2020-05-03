@@ -48,7 +48,7 @@ db_multirow -extend { faq_url parent_name url } faqs select_faqs [subst {
            acs_objects o
     where f.faq_id = o.object_id
       and not f.disabled_p
-      and o.object_id in ([join $list_of_package_ids ", "])
+      and o.object_id in ([ns_dbquotelist $list_of_package_ids])
     order by lower(faq_name)
 }] {
     set node [site_node::get_from_object_id -object_id $package_id]
