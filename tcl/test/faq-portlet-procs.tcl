@@ -184,6 +184,19 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_delete_Q_A_f
     }
 }
 
+aa_register_case -procs {
+        faq_admin_portlet::link
+        faq_portlet::link
+    } -cats {
+        api
+        production_safe
+    } faq_portlet_links {
+        Test diverse link procs.
+} {
+    aa_equals "FAQ admin portlet link" "[faq_admin_portlet::link]" ""
+    aa_equals "FAQ portlet link"       "[faq_portlet::link]" ""
+}
+
 # Local variables:
 #    mode: tcl
 #    tcl-indent-level: 4
