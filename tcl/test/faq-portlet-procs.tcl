@@ -187,14 +187,18 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_delete_Q_A_f
 aa_register_case -procs {
         faq_admin_portlet::link
         faq_portlet::link
+        faq_admin_portlet::get_pretty_name
+        faq_portlet::get_pretty_name
     } -cats {
         api
         production_safe
-    } faq_portlet_links {
-        Test diverse link procs.
+    } faq_portlet_links_names {
+        Test diverse link and name procs.
 } {
-    aa_equals "FAQ admin portlet link" "[faq_admin_portlet::link]" ""
-    aa_equals "FAQ portlet link"       "[faq_portlet::link]" ""
+    aa_equals "FAQ admin portlet link"          "[faq_admin_portlet::link]" ""
+    aa_equals "FAQ portlet link"                "[faq_portlet::link]" ""
+    aa_equals "FAQ admin portlet pretty name"   "[faq_admin_portlet::get_pretty_name]" "#faq-portlet.admin_pretty_name#"
+    aa_equals "FAQ portlet pretty name"         "[faq_portlet::get_pretty_name]" "#faq-portlet.pretty_name#"
 }
 
 # Local variables:
