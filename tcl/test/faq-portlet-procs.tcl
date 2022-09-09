@@ -14,7 +14,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest  tclwebtest_new_faq_por
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
         # Create new Faq
@@ -35,7 +35,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest  tclwebtest_delete_faq_
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
         # Create a new Faq
@@ -59,7 +59,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_disable_faq_
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
         # Create new faq
@@ -84,7 +84,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_enable_faq_p
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
         # Create the Faq
@@ -113,7 +113,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_edit_faq_por
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
         # Create a new faq
@@ -138,7 +138,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_new_Q_A_faq_
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
         # Create a new faq
@@ -164,7 +164,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_delete_Q_A_f
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
         # Create a new faq
