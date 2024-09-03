@@ -28,7 +28,7 @@ array set config $cf
 
 set shaded_p $config(shaded_p)
 set list_of_package_ids $config(package_id)
-set one_instance_p [ad_decode [llength $list_of_package_ids] 1 1 0]
+set one_instance_p [expr {[llength $list_of_package_ids] == 1}]
 
 template::list::create -name faqs -multirow faqs -key faq_id -no_data [_ faq-portlet.no_faqs] -elements {
     faq_name {
@@ -48,7 +48,7 @@ db_multirow -extend { faq_url parent_name url } faqs select_faqs [subst {
            acs_objects o
     where f.faq_id = o.object_id
       and not f.disabled_p
-      and o.object_id in ([join $list_of_package_ids ", "])
+      and o.object_id in ([ns_dbquotelist $list_of_package_ids])
     order by lower(faq_name)
 }] {
     set node [site_node::get_from_object_id -object_id $package_id]
@@ -70,8 +70,8 @@ if {${faqs:rowcount} == 1} {
                faq_id,
                question,
                answer,
-               sort_key 
-        from faq_q_and_as 
+               sort_key
+        from faq_q_and_as
         where faq_id = :faq_id
         order by sort_key
     }

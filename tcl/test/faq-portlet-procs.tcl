@@ -5,6 +5,58 @@ ad_library {
 
 }
 
+aa_register_case -procs {
+    faq_admin_portlet::show
+    faq_portlet::show
+} -cats {
+    api
+    smoke
+} faq_render_portlet {
+    Test the rendering of the portlets
+} {
+    aa_run_with_teardown -rollback -test_code {
+        set package_id [site_node::instantiate_and_mount \
+                            -package_key faq \
+                            -node_name __test_faq_portlet]
+
+        foreach shaded_p {true false} {
+
+            set cf [list \
+                        package_id $package_id \
+                        shaded_p $shaded_p \
+                       ]
+
+            foreach portlet {faq_admin_portlet faq_portlet} {
+                set section_name $portlet
+                if {$shaded_p} {
+                    append section_name " (shaded)"
+                }
+                aa_section $section_name
+
+                set portlet [acs_sc::invoke \
+                                 -contract portal_datasource \
+                                 -operation Show \
+                                 -impl $portlet \
+                                 -call_args [list $cf]]
+
+                aa_log "Portlet returns: [ns_quotehtml $portlet]"
+
+                aa_false "No error was returned" {
+                    [string first "Error in include template" $portlet] >= 0
+                }
+
+                aa_false "No unresolved message keys" {
+                    [string first "MESSAGE KEY MISSING: " $portlet] >= 0
+                }
+
+                aa_true "Portlet contains something" {
+                    [string length [string trim $portlet]] > 0
+                }
+            }
+        }
+    }
+}
+
 aa_register_case -cats {web smoke} -libraries tclwebtest  tclwebtest_new_faq_portlet {
 
     Testing the creation a Faq from the portlet.
@@ -14,7 +66,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest  tclwebtest_new_faq_por
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
         # Create new Faq
@@ -35,7 +87,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest  tclwebtest_delete_faq_
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
         # Create a new Faq
@@ -59,7 +111,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_disable_faq_
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
         # Create new faq
@@ -84,7 +136,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_enable_faq_p
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
         # Create the Faq
@@ -113,10 +165,10 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_edit_faq_por
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
-        # Creat a new faq
+        # Create a new faq
         set faq_name [ad_generate_random_string]
         faq_portlet::twt::new $faq_name
 
@@ -138,10 +190,10 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_new_Q_A_faq_
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
-        # Creat a new faq
+        # Create a new faq
         set faq_name [ad_generate_random_string]
         faq_portlet::twt::new $faq_name
 
@@ -164,10 +216,10 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_delete_Q_A_f
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
-        # Creat a new faq
+        # Create a new faq
         set faq_name [ad_generate_random_string]
         faq_portlet::twt::new $faq_name
 
@@ -181,6 +233,107 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_delete_Q_A_f
         aa_display_result -response $response -explanation {Webtest for deleting a Question in a Faq}
 
         twt::user::logout
+    }
+}
+
+aa_register_case -procs {
+        faq_admin_portlet::link
+        faq_portlet::link
+        faq_admin_portlet::get_pretty_name
+        faq_portlet::get_pretty_name
+    } -cats {
+        api
+        production_safe
+    } faq_portlet_links_names {
+        Test diverse link and name procs.
+} {
+    aa_equals "FAQ admin portlet link"          "[faq_admin_portlet::link]" ""
+    aa_equals "FAQ portlet link"                "[faq_portlet::link]" ""
+    aa_equals "FAQ admin portlet pretty name"   "[faq_admin_portlet::get_pretty_name]" "#faq-portlet.admin_pretty_name#"
+    aa_equals "FAQ portlet pretty name"         "[faq_portlet::get_pretty_name]" "#faq-portlet.pretty_name#"
+}
+
+aa_register_case -procs {
+        faq_portlet::add_self_to_page
+        faq_portlet::remove_self_from_page
+        faq_admin_portlet::add_self_to_page
+        faq_admin_portlet::remove_self_from_page
+    } -cats {
+        api
+    } faq_portlet_add_remove_from_page {
+        Test add/remove portlet procs.
+} {
+    #
+    # Helper proc to check portal elements
+    #
+    proc portlet_exists_p {portal_id portlet_name} {
+        return [db_0or1row portlet_in_portal {
+            select 1 from dual where exists (
+              select 1
+                from portal_element_map pem,
+                     portal_pages pp
+               where pp.portal_id = :portal_id
+                 and pp.page_id = pem.page_id
+                 and pem.name = :portlet_name
+            )
+        }]
+    }
+    #
+    # Start the tests
+    #
+    aa_run_with_teardown -rollback -test_code {
+        #
+        # Create a community.
+        #
+        # As this is running in a transaction, it should be cleaned up
+        # automatically.
+        #
+        set community_id [dotlrn_community::new -community_type dotlrn_community -pretty_name foo]
+        if {$community_id ne ""} {
+            aa_log "Community created: $community_id"
+            set portal_id [dotlrn_community::get_admin_portal_id -community_id $community_id]
+            set package_id [dotlrn::instantiate_and_mount $community_id [faq_portlet::my_package_key]]
+            #
+            # faq_portlet
+            #
+            set portlet_name [faq_portlet::get_my_name]
+            #
+            # Add portlet.
+            #
+            faq_portlet::add_self_to_page -portal_id $portal_id -package_id $package_id -param_action ""
+            aa_true "Portlet is in community portal after addition" "[portlet_exists_p $portal_id $portlet_name]"
+            #
+            # Remove portlet.
+            #
+            faq_portlet::remove_self_from_page -portal_id $portal_id -package_id $package_id
+            aa_false "Portlet is in community portal after removal" "[portlet_exists_p $portal_id $portlet_name]"
+            #
+            # Add portlet.
+            #
+            faq_portlet::add_self_to_page -portal_id $portal_id -package_id $package_id -param_action ""
+            aa_true "Portlet is in community portal after addition" "[portlet_exists_p $portal_id $portlet_name]"
+            #
+            # admin_portlet
+            #
+            set portlet_name [faq_admin_portlet::get_my_name]
+            #
+            # Add portlet.
+            #
+            faq_admin_portlet::add_self_to_page -portal_id $portal_id -package_id $package_id
+            aa_true "Admin portlet is in community portal after addition" "[portlet_exists_p $portal_id $portlet_name]"
+            #
+            # Remove portlet.
+            #
+            faq_admin_portlet::remove_self_from_page $portal_id
+            aa_false "Admin portlet is in community portal after removal" "[portlet_exists_p $portal_id $portlet_name]"
+            #
+            # Add portlet.
+            #
+            faq_admin_portlet::add_self_to_page -portal_id $portal_id -package_id $package_id
+            aa_true "Admin portlet is in community portal after addition" "[portlet_exists_p $portal_id $portlet_name]"
+        } else {
+            aa_error "Community creation failed"
+        }
     }
 }
 
